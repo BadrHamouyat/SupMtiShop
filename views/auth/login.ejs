@@ -1,0 +1,20 @@
+<%- include('../partials/header') %>
+
+<main class="container">
+  <div class="card auth-card">
+    <h1>Connexion</h1>
+    <p class="notice">Admin: admin@market.ma / admin123<br>Client: client@market.ma / client123</p>
+    <form action="/login" method="POST">
+      <label>Email</label>
+      <input class="input" type="email" name="email" required>
+      <br><br>
+      <label>Mot de passe</label>
+      <input class="input" type="password" name="password" required>
+      <br><br>
+      <button class="btn orange" type="submit" style="width:100%">Se connecter</button>
+    </form>
+    <p>Pas de compte ? <a href="/register"><strong>Créer un compte</strong></a></p>
+  </div>
+</main>
+
+<%- include('../partials/footer') %>

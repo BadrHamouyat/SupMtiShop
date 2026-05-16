@@ -1,0 +1,23 @@
+@startuml
+node "PC Client / Navigateur" as Browser {
+  artifact "Interface SupMtiShop"
+}
+
+node "Serveur Node.js" as Server {
+  artifact "Express.js"
+  artifact "Views EJS"
+  artifact "Public CSS/JS/Images"
+}
+
+database "Base locale JSON" as DB {
+  artifact "data/store.json"
+}
+
+folder "Images uploadées" as Uploads {
+  artifact "public/images/uploads"
+}
+
+Browser --> Server : HTTP
+Server --> DB : lecture/écriture
+Server --> Uploads : sauvegarde images
+@enduml

@@ -1,0 +1,21 @@
+@startuml
+actor Client
+participant "Interface Web" as UI
+participant "Serveur Express" as Server
+database "store.json" as DB
+
+Client -> UI : Ajouter produit au panier
+UI -> Server : POST /cart/add
+Server -> DB : Lire produit
+Server -> UI : Panier mis à jour
+Client -> UI : Valider commande
+UI -> Server : POST /checkout
+Server -> DB : Créer commande
+alt Paiement en ligne
+  Server -> DB : paymentStatus = paid
+else Paiement à la livraison
+  Server -> DB : paymentStatus = pending
+end
+Server -> UI : Confirmation commande
+UI -> Client : Afficher détail commande
+@enduml

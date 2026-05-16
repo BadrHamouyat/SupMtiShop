@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SupMtiShop | Boutique en ligne moderne</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="topbar">
+    <div class="container">
+      <span>SupMtiShop • Offres exclusives chaque jour • Livraison rapide • Retours faciles</span>
+      <a class="topbar-link" href="https://wa.me/212762878817" target="_blank" rel="noopener">Support WhatsApp: +212 762 878 817</a>
+    </div>
+  </div>
+
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a class="logo logo-image" href="/" aria-label="SupMtiShop">
+        <img src="/images/supmtishop-logo.png" alt="SupMtiShop">
+      </a>
+
+      <form class="searchbar" method="GET" action="/products">
+        <input type="search" name="q" placeholder="Rechercher vos coups de cœur, marques, catégories..." value="<%= typeof query !== 'undefined' && query.q ? query.q : '' %>">
+        <button type="submit">🔎 Chercher</button>
+      </form>
+
+      <div class="nav-actions">
+        <a href="/products">Produits</a>
+        <a href="/cart">Panier <%= cartCount ? `(${cartCount})` : '' %></a>
+        <% if (currentUser) { %>
+          <% if (currentUser.role === 'admin') { %>
+            <a href="/admin">Admin</a>
+          <% } else { %>
+            <a href="/orders">Mes commandes</a>
+          <% } %>
+          <form action="/logout" method="POST">
+            <button type="submit">Déconnexion</button>
+          </form>
+        <% } else { %>
+          <a href="/login">Connexion</a>
+          <a href="/register">Créer un compte</a>
+        <% } %>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container flash">
+    <% messages.success.forEach(function(msg){ %>
+      <div class="success"><%= msg %></div>
+    <% }) %>
+    <% messages.error.forEach(function(msg){ %>
+      <div class="error"><%= msg %></div>
+    <% }) %>
+  </div>

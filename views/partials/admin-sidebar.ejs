@@ -1,0 +1,8 @@
+<div class="admin-sidebar">
+  <h2>⚙️ Admin</h2>
+  <a class="<%= path === '/admin' ? 'active' : '' %>" href="/admin">Dashboard</a>
+  <a class="<%= path.startsWith('/admin/products') ? 'active' : '' %>" href="/admin/products">Produits</a>
+  <a class="<%= path.startsWith('/admin/orders') ? 'active' : '' %>" href="/admin/orders">Commandes</a>
+  <a class="<%= path.startsWith('/admin/users') ? 'active' : '' %>" href="/admin/users">Utilisateurs</a>
+  <a href="/">Voir la boutique</a>
+</div>

@@ -1,0 +1,38 @@
+<%- include('../partials/header') %>
+<div class="admin-shell">
+  <%- include('../partials/admin-sidebar') %>
+  <main class="admin-main">
+    <div class="section-head">
+      <div>
+        <h2>Gestion utilisateurs</h2>
+        <p>Voir les clients et supprimer les comptes clients.</p>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Nom</th><th>Email</th><th>Rôle</th><th>Date création</th><th>Action</th></tr></thead>
+        <tbody>
+          <% users.forEach(function(user){ %>
+            <tr>
+              <td><strong><%= user.name %></strong></td>
+              <td><%= user.email %></td>
+              <td><span class="status"><%= user.role %></span></td>
+              <td><%= new Date(user.createdAt).toLocaleDateString('fr-FR') %></td>
+              <td>
+                <% if (user.role !== 'admin') { %>
+                  <form action="/admin/users/<%= user.id %>?_method=DELETE" method="POST">
+                    <button class="btn danger small" data-confirm="Supprimer cet utilisateur ?" type="submit">Supprimer</button>
+                  </form>
+                <% } else { %>
+                  —
+                <% } %>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </main>
+</div>
+<%- include('../partials/footer') %>

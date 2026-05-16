@@ -1,0 +1,87 @@
+<%- include('../partials/header') %>
+<div class="admin-shell">
+  <%- include('../partials/admin-sidebar') %>
+  <main class="admin-main">
+    <div class="section-head admin-headline">
+      <div>
+        <span class="eyebrow">Gestion du catalogue</span>
+        <h2><%= product ? 'Modifier produit' : 'Ajouter produit' %></h2>
+        <p>Crée une fiche produit complète avec image, catégorie, prix, stock et badges marketing.</p>
+      </div>
+      <a class="btn ghost" href="/admin/products">← Retour produits</a>
+    </div>
+
+    <form class="card product-editor" action="<%= action %>" method="POST" enctype="multipart/form-data">
+      <div class="editor-preview">
+        <div class="preview-frame">
+          <img id="imagePreview" src="<%= product ? product.image : '/images/products/p1.svg' %>" alt="Aperçu produit">
+        </div>
+        <div>
+          <span class="badge">📸 Image produit</span>
+          <h3>Aperçu automatique</h3>
+          <p class="muted">Clique sur le bouton pour choisir une image de ton ordinateur. Formats conseillés : JPG, PNG, WEBP. Taille max : 3 MB.</p>
+          <label class="upload-box" for="productImage">
+            <input id="productImage" type="file" name="productImage" accept="image/*">
+            <span class="upload-icon">⬆️</span>
+            <strong>Choisir une image depuis mon PC</strong>
+            <small id="fileName">Aucun fichier choisi</small>
+          </label>
+        </div>
+      </div>
+
+      <div class="form-grid modern-form">
+        <div>
+          <label>Titre</label>
+          <input class="input" name="title" required placeholder="Ex: Casque Gaming RGB" value="<%= product ? product.title : '' %>">
+        </div>
+        <div>
+          <label>Catégorie</label>
+          <select id="categorySelect" name="category" required>
+            <option value="">Sélectionner une catégorie</option>
+            <% categories.forEach(function(cat){ %>
+              <option value="<%= cat %>" <%= product && product.category === cat ? 'selected' : '' %>><%= cat %></option>
+            <% }) %>
+            <option value="__other">+ Nouvelle catégorie</option>
+          </select>
+          <input class="input category-other" id="categoryOther" name="categoryOther" placeholder="Ex: Téléphones, Cuisine, Parfums...">
+        </div>
+        <div>
+          <label>Prix actuel</label>
+          <input class="input" id="priceInput" type="number" step="0.01" name="price" required placeholder="Calcul automatique" value="<%= product ? product.price : '' %>">
+          <small class="form-help">Se remplit automatiquement avec l’ancien prix et le badge réduction.</small>
+        </div>
+        <div>
+          <label>Ancien prix</label>
+          <input class="input" id="oldPriceInput" type="number" step="0.01" name="oldPrice" placeholder="Ex: 399" value="<%= product ? product.oldPrice : '' %>">
+        </div>
+        <div>
+          <label>Stock</label>
+          <input class="input" type="number" name="stock" required placeholder="20" value="<%= product ? product.stock : '' %>">
+        </div>
+        <div>
+          <label>Badge réduction</label>
+          <select id="discountSelect" name="discountPercent">
+            <% const selectedDiscount = product ? getDiscountPercent(product) : 0; %>
+            <% const discountOptions = [0,5,10,15,20,25,30,35,40,45,50,60,70,80]; %>
+            <% if (selectedDiscount > 0 && !discountOptions.includes(selectedDiscount)) discountOptions.push(selectedDiscount); %>
+            <% discountOptions.sort((a, b) => a - b).forEach(function(value){ %>
+              <option value="<%= value %>" <%= selectedDiscount === value ? 'selected' : '' %>>-<%= value %>%</option>
+            <% }) %>
+          </select>
+          <small class="form-help">Exemple : ancien prix 399 + badge -20% = prix actuel 319.20 DH.</small>
+        </div>
+        <div class="full">
+          <label>Description</label>
+          <textarea name="description" placeholder="Décris le produit, ses avantages, la livraison, etc."><%= product ? product.description : '' %></textarea>
+        </div>
+        <label class="switch-line"><input type="checkbox" name="featured" <%= product && product.featured ? 'checked' : '' %>> <span>Produit recommandé sur l'accueil</span></label>
+        <label class="switch-line"><input type="checkbox" name="deal" <%= product && product.deal ? 'checked' : '' %>> <span>Afficher dans la section promotions</span></label>
+      </div>
+      <div class="form-actions">
+        <button class="btn orange" type="submit">💾 Enregistrer</button>
+        <a class="btn ghost" href="/admin/products">Annuler</a>
+      </div>
+    </form>
+  </main>
+</div>
+<%- include('../partials/footer') %>

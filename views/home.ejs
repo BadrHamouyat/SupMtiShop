@@ -1,0 +1,78 @@
+<%- include('partials/header') %>
+
+<section class="hero hero-modern">
+  <div class="container hero-grid">
+    <div class="hero-card hero-glow">
+      <span class="badge">🔥 Offres du jour</span>
+      <h1>SupMtiShop, votre boutique moderne au meilleur prix.</h1>
+      <p>Découvrez des produits utiles, tendance et accessibles dans une expérience d'achat claire, rapide et professionnelle.</p>
+      <div class="hero-actions">
+        <a class="btn orange" href="/products">Découvrir les produits</a>
+        <% if (!currentUser) { %>
+          <a class="btn glass" href="/register">Créer un compte</a>
+        <% } %>
+      </div>
+      <div class="trust-row">
+        <span>🚚 Livraison dès 25 DH</span>
+        <span>💳 Paiement en ligne au checkout</span>
+        <span>↩️ Retours faciles</span>
+      </div>
+    </div>
+
+    <div class="coupon-card coupon-modern">
+      <span class="badge">🎁 Avantage panier</span>
+      <div class="big">-50 DH</div>
+      <p>Plus vous ajoutez, plus vous économisez : réduction dès 700 DH et livraison gratuite dès 300 DH.</p>
+      <a class="btn light" href="/products?sort=sold">Voir top ventes</a>
+    </div>
+  </div>
+</section>
+
+<section class="categories">
+  <div class="container">
+    <div class="category-row category-icons">
+      <a class="category-pill" href="/products">✨ Toutes</a>
+      <% categories.forEach(function(cat){ %>
+        <a class="category-pill" href="/products?category=<%= encodeURIComponent(cat) %>">🛒 <%= cat %></a>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+<main class="container">
+  <div class="promo-strip">
+    <div><strong>Offres exclusives</strong><span>Des promotions sélectionnées chaque jour</span></div>
+    <div><strong>Produits populaires</strong><span>Les articles les plus demandés</span></div>
+    <div><strong>Service rapide</strong><span>Commande simple et suivi clair</span></div>
+  </div>
+
+  <div class="section-head">
+    <div>
+      <h2>Promotions du jour</h2>
+      <p>Des réductions claires pour acheter plus intelligemment.</p>
+    </div>
+    <a class="btn ghost small" href="/products?sort=price_asc">Voir plus</a>
+  </div>
+
+  <div class="product-grid">
+    <% deals.forEach(function(product){ %>
+      <%- include('partials/product-card', { product }) %>
+    <% }) %>
+  </div>
+
+  <div class="section-head">
+    <div>
+      <h2>Produits recommandés</h2>
+      <p>Nos recommandations pour vous aider à choisir rapidement.</p>
+    </div>
+    <a class="btn ghost small" href="/products?sort=rating">Meilleures notes</a>
+  </div>
+
+  <div class="product-grid">
+    <% featured.forEach(function(product){ %>
+      <%- include('partials/product-card', { product }) %>
+    <% }) %>
+  </div>
+</main>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,34 @@
+<%- include('partials/header') %>
+
+<main class="container">
+  <div class="section-head">
+    <div>
+      <h2>Mes commandes</h2>
+      <p>Historique de vos achats.</p>
+    </div>
+  </div>
+
+  <% if (!orders.length) { %>
+    <div class="empty">Vous n'avez pas encore de commande.</div>
+  <% } else { %>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Référence</th><th>Date</th><th>Total</th><th>Paiement</th><th>Statut</th><th></th></tr></thead>
+        <tbody>
+          <% orders.forEach(function(order){ %>
+            <tr>
+              <td><strong><%= order.reference %></strong></td>
+              <td><%= new Date(order.createdAt).toLocaleString('fr-FR') %></td>
+              <td><%= formatPrice(order.total) %></td>
+              <td><span class="status <%= order.paymentStatus %>"><%= order.paymentStatus %></span></td>
+              <td><span class="status <%= order.status %>"><%= order.status %></span></td>
+              <td><a class="btn ghost small" href="/orders/<%= order.id %>">Détails</a></td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  <% } %>
+</main>
+
+<%- include('partials/footer') %>

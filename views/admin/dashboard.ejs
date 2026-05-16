@@ -1,0 +1,57 @@
+<%- include('../partials/header') %>
+<div class="admin-shell">
+  <%- include('../partials/admin-sidebar') %>
+  <main class="admin-main">
+    <div class="section-head">
+      <div>
+        <h2>Dashboard administrateur</h2>
+        <p>Résumé de la boutique. Le chiffre d'affaires compte seulement les commandes payées.</p>
+      </div>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card"><span>Produits</span><strong><%= stats.products %></strong></div>
+      <div class="stat-card"><span>Clients</span><strong><%= stats.users %></strong></div>
+      <div class="stat-card"><span>Commandes</span><strong><%= stats.orders %></strong></div>
+      <div class="stat-card"><span>Commandes payées</span><strong><%= stats.paidOrders %></strong></div>
+      <div class="stat-card"><span>Chiffre d'affaires payé</span><strong><%= formatPrice(stats.revenue) %></strong></div>
+    </div>
+
+    <div class="section-head">
+      <h2>Dernières commandes</h2>
+      <a class="btn ghost small" href="/admin/orders">Tout voir</a>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Référence</th><th>Client</th><th>Total</th><th>Statut</th></tr></thead>
+        <tbody>
+          <% latestOrders.forEach(function(order){ %>
+            <tr>
+              <td><%= order.reference %></td>
+              <td><%= order.customer.fullName %></td>
+              <td><%= formatPrice(order.total) %></td>
+              <td><span class="status <%= order.status %>"><%= order.status %></span></td>
+            </tr>
+          <% }) %>
+          <% if (!latestOrders.length) { %><tr><td colspan="4">Aucune commande.</td></tr><% } %>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section-head">
+      <h2>Stock faible</h2>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Produit</th><th>Stock</th><th>Catégorie</th></tr></thead>
+        <tbody>
+          <% lowStock.forEach(function(product){ %>
+            <tr><td><%= product.title %></td><td><%= product.stock %></td><td><%= product.category %></td></tr>
+          <% }) %>
+          <% if (!lowStock.length) { %><tr><td colspan="3">Aucun stock faible.</td></tr><% } %>
+        </tbody>
+      </table>
+    </div>
+  </main>
+</div>
+<%- include('../partials/footer') %>

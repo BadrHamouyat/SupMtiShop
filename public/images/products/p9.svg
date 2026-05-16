@@ -1,0 +1,9 @@
+<svg width="800" height="600" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="g" x1="0" y1="0" x2="800" y2="600" gradientUnits="userSpaceOnUse"><stop stop-color="#22c55e"/><stop offset="1" stop-color="#bbf7d0"/></linearGradient></defs>
+<rect width="800" height="600" rx="44" fill="url(#g)"/>
+<circle cx="650" cy="110" r="120" fill="white" opacity=".18"/>
+<circle cx="110" cy="520" r="160" fill="white" opacity=".15"/>
+<text x="400" y="250" text-anchor="middle" font-size="140" font-family="Arial, sans-serif">🍽️</text>
+<text x="400" y="380" text-anchor="middle" font-size="42" fill="white" font-weight="700" font-family="Arial, sans-serif">Organisateur cuisine</text>
+<text x="400" y="438" text-anchor="middle" font-size="30" fill="white" opacity=".9" font-family="Arial, sans-serif">Maison</text>
+</svg>

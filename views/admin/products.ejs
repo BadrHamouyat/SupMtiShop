@@ -1,0 +1,70 @@
+<%- include('../partials/header') %>
+<div class="admin-shell">
+  <%- include('../partials/admin-sidebar') %>
+  <main class="admin-main">
+    <div class="section-head admin-headline">
+      <div>
+        <span class="eyebrow">Dashboard catalogue</span>
+        <h2>Gestion produits</h2>
+        <p>Ajouter, modifier, supprimer et rechercher les produits.</p>
+      </div>
+      <a class="btn orange" href="/admin/products/new">＋ Ajouter produit</a>
+    </div>
+
+    <div class="stats-grid compact-stats">
+      <div class="stat-card"><span>Total produits</span><strong><%= productStats.total %></strong></div>
+      <div class="stat-card"><span>Promotions</span><strong><%= productStats.deals %></strong></div>
+      <div class="stat-card"><span>Recommandés</span><strong><%= productStats.featured %></strong></div>
+      <div class="stat-card"><span>Stock faible</span><strong><%= productStats.lowStock %></strong></div>
+    </div>
+
+    <div class="card admin-toolbar">
+      <form class="admin-search" method="GET" action="/admin/products">
+        <input class="input" type="search" name="q" placeholder="Rechercher par nom, catégorie ou description..." value="<%= q %>">
+        <button class="btn orange" type="submit">Rechercher</button>
+        <% if (q) { %><a class="btn ghost" href="/admin/products">Reset</a><% } %>
+      </form>
+    </div>
+
+    <div class="table-wrap modern-table">
+      <table>
+        <thead><tr><th>Produit</th><th>Catégorie</th><th>Prix</th><th>Stock</th><th>Visibilité</th><th>Actions</th></tr></thead>
+        <tbody>
+          <% if (!products.length) { %>
+            <tr><td colspan="6"><div class="empty">Aucun produit trouvé.</div></td></tr>
+          <% } %>
+          <% products.forEach(function(product){ %>
+            <tr>
+              <td>
+                <div class="mini-product rich-mini">
+                  <img src="<%= product.image %>" alt="<%= product.title %>">
+                  <div>
+                    <strong><%= product.title %></strong>
+                    <small><%= product.sold || 0 %> vendus • ⭐ <%= product.rating || 4.2 %></small>
+                  </div>
+                </div>
+              </td>
+              <td><span class="category-tag"><%= product.category %></span></td>
+              <td><strong><%= formatPrice(product.price) %></strong></td>
+              <td><span class="status <%= Number(product.stock) <= 10 ? 'cancelled' : 'paid' %>"><%= product.stock %></span></td>
+              <td>
+                <% const discount = getDiscountPercent(product); %>
+                <% if (discount > 0) { %><span class="status pending">-<%= discount %>%</span><% } else if (product.deal) { %><span class="status pending">Promo</span><% } %>
+                <% if (product.featured) { %><span class="status paid">Accueil</span><% } %>
+              </td>
+              <td>
+                <div class="row-actions">
+                  <a class="btn ghost small" href="/admin/products/<%= product.id %>/edit">Modifier</a>
+                  <form action="/admin/products/<%= product.id %>?_method=DELETE" method="POST">
+                    <button class="btn danger small" data-confirm="Supprimer ce produit ?" type="submit">Supprimer</button>
+                  </form>
+                </div>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </main>
+</div>
+<%- include('../partials/footer') %>

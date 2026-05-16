@@ -1,0 +1,42 @@
+<%- include('partials/header') %>
+
+<main class="container">
+  <div class="section-head">
+    <div>
+      <h2>Commande <%= order.reference %></h2>
+      <p>Statut: <span class="status <%= order.status %>"><%= order.status %></span></p>
+    </div>
+    <a class="btn ghost" href="/orders">Retour</a>
+  </div>
+
+  <div class="checkout-grid">
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Produit</th><th>Prix</th><th>Quantité</th><th>Total</th></tr></thead>
+        <tbody>
+          <% order.items.forEach(function(item){ %>
+            <tr>
+              <td><div class="mini-product"><img src="<%= item.image %>"><strong><%= item.title %></strong></div></td>
+              <td><%= formatPrice(item.price) %></td>
+              <td><%= item.qty %></td>
+              <td><%= formatPrice(item.subtotal) %></td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>Informations</h2>
+      <p><strong>Client:</strong> <%= order.customer.fullName %></p>
+      <p><strong>Téléphone:</strong> <%= order.customer.phone %></p>
+      <p><strong>Adresse:</strong> <%= order.customer.address %>, <%= order.customer.city %></p>
+      <p><strong>Paiement:</strong> <%= order.paymentMethod === 'online' ? 'En ligne' : 'À la livraison' %></p>
+      <p><strong>Statut paiement:</strong> <span class="status <%= order.paymentStatus %>"><%= order.paymentStatus %></span></p>
+      <% if (order.paymentReference) { %><p><strong>Référence paiement:</strong> <%= order.paymentReference %></p><% } %>
+      <div class="summary-line total"><span>Total</span><strong><%= formatPrice(order.total) %></strong></div>
+    </div>
+  </div>
+</main>
+
+<%- include('partials/footer') %>

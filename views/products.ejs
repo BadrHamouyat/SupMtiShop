@@ -1,0 +1,43 @@
+<%- include('partials/header') %>
+
+<main class="container">
+  <div class="section-head">
+    <div>
+      <h2>Tous les produits</h2>
+      <p>Recherche, catégories, prix maximum et tri.</p>
+    </div>
+  </div>
+
+  <div class="card filter-card">
+    <form class="filters" method="GET" action="/products">
+      <input class="input" type="search" name="q" placeholder="Nom du produit..." value="<%= query.q || '' %>">
+      <select name="category">
+        <option value="">Toutes catégories</option>
+        <% categories.forEach(function(cat){ %>
+          <option value="<%= cat %>" <%= query.category === cat ? 'selected' : '' %>><%= cat %></option>
+        <% }) %>
+      </select>
+      <input class="input" type="number" name="max" placeholder="Prix max" value="<%= query.max || '' %>">
+      <select name="sort">
+        <option value="">Tri normal</option>
+        <option value="price_asc" <%= query.sort === 'price_asc' ? 'selected' : '' %>>Prix croissant</option>
+        <option value="price_desc" <%= query.sort === 'price_desc' ? 'selected' : '' %>>Prix décroissant</option>
+        <option value="rating" <%= query.sort === 'rating' ? 'selected' : '' %>>Meilleures notes</option>
+        <option value="sold" <%= query.sort === 'sold' ? 'selected' : '' %>>Top ventes</option>
+      </select>
+      <button class="btn orange" type="submit">Filtrer</button>
+    </form>
+  </div>
+
+  <% if (!products.length) { %>
+    <div class="empty">Aucun produit trouvé.</div>
+  <% } else { %>
+    <div class="product-grid">
+      <% products.forEach(function(product){ %>
+        <%- include('partials/product-card', { product }) %>
+      <% }) %>
+    </div>
+  <% } %>
+</main>
+
+<%- include('partials/footer') %>

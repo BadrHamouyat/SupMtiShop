@@ -1,0 +1,83 @@
+<%- include('partials/header') %>
+
+<main class="container">
+  <div class="section-head">
+    <div>
+      <h2>Finaliser la commande</h2>
+      <p>Choisissez le mode de paiement et les informations de livraison.</p>
+    </div>
+  </div>
+
+  <div class="checkout-grid">
+    <form class="card" action="/checkout" method="POST">
+      <div class="form-grid">
+        <div>
+          <label>Nom complet</label>
+          <input class="input" name="fullName" required value="<%= currentUser.name %>">
+        </div>
+        <div>
+          <label>Téléphone</label>
+          <input class="input" name="phone" required placeholder="06 00 00 00 00">
+        </div>
+        <div>
+          <label>Ville</label>
+          <input class="input" name="city" required placeholder="Oujda, Taourirt, Rabat...">
+        </div>
+        <div>
+          <label>Mode de paiement</label>
+          <select name="paymentMethod" id="paymentMethod" required>
+            <option value="cash">Paiement à la livraison</option>
+            <option value="online">Paiement en ligne</option>
+          </select>
+        </div>
+        <div class="full online-payment-fields" id="onlinePaymentFields">
+          <div class="online-payment-head">
+            <strong>💳 Paiement en ligne sécurisé</strong>
+            <span>Total: <%= formatPrice(total) %></span>
+          </div>
+          <div class="form-grid compact-grid">
+            <div>
+              <label>Nom sur la carte</label>
+              <input class="input" name="cardName" placeholder="Badr Hamouyat" data-online-field>
+            </div>
+            <div>
+              <label>Numéro de carte</label>
+              <input class="input" name="cardNumber" inputmode="numeric" placeholder="4242 4242 4242 4242" data-online-field>
+            </div>
+            <div>
+              <label>Expiration</label>
+              <input class="input" name="cardExpiry" placeholder="MM/AA" data-online-field>
+            </div>
+            <div>
+              <label>CVV</label>
+              <input class="input" name="cardCvc" inputmode="numeric" placeholder="123" data-online-field>
+            </div>
+          </div>
+          <p class="muted secure-note">Les données complètes de la carte ne sont pas enregistrées dans la base.</p>
+        </div>
+        <div class="full">
+          <label>Adresse complète</label>
+          <textarea name="address" required placeholder="Adresse, quartier, numéro..."></textarea>
+        </div>
+      </div>
+      <br>
+      <button class="btn orange" type="submit">Confirmer la commande</button>
+    </form>
+
+    <div class="card">
+      <h2>Résumé</h2>
+      <% items.forEach(function(item){ %>
+        <div class="summary-line">
+          <span><%= item.qty %> × <%= item.product.title %></span>
+          <strong><%= formatPrice(item.subtotal) %></strong>
+        </div>
+      <% }) %>
+      <div class="summary-line"><span>Livraison</span><strong><%= shipping ? formatPrice(shipping) : 'Gratuite' %></strong></div>
+      <div class="summary-line"><span>Réduction</span><strong>- <%= formatPrice(discount) %></strong></div>
+      <div class="summary-line total"><span>Total</span><strong><%= formatPrice(total) %></strong></div>
+      <div class="notice">Après confirmation, vous recevrez le résumé de votre commande et les informations de suivi.</div>
+    </div>
+  </div>
+</main>
+
+<%- include('partials/footer') %>

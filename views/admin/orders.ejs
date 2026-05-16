@@ -1,0 +1,48 @@
+<%- include('../partials/header') %>
+<div class="admin-shell">
+  <%- include('../partials/admin-sidebar') %>
+  <main class="admin-main">
+    <div class="section-head">
+      <div>
+        <h2>Gestion commandes</h2>
+        <p>Changer le statut de livraison et du paiement. Seules les commandes payées sont comptées dans le chiffre d'affaires.</p>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Réf</th><th>Client</th><th>Total</th><th>Paiement</th><th>Statut</th><th>Changer</th></tr></thead>
+        <tbody>
+          <% orders.forEach(function(order){ %>
+            <tr>
+              <td><strong><%= order.reference %></strong><br><small><%= new Date(order.createdAt).toLocaleString('fr-FR') %></small></td>
+              <td><%= order.customer.fullName %><br><small><%= order.customer.phone %> — <%= order.customer.city %></small></td>
+              <td><%= formatPrice(order.total) %></td>
+              <td><span class="status <%= order.paymentStatus %>"><%= order.paymentStatus %></span></td>
+              <td><span class="status <%= order.status %>"><%= order.status %></span></td>
+              <td>
+                <form action="/admin/orders/<%= order.id %>/status" method="POST" style="display:grid;gap:8px;min-width:230px">
+                  <select name="status">
+                    <option value="new" <%= order.status === 'new' ? 'selected' : '' %>>Nouvelle</option>
+                    <option value="processing" <%= order.status === 'processing' ? 'selected' : '' %>>En préparation</option>
+                    <option value="shipped" <%= order.status === 'shipped' ? 'selected' : '' %>>Expédiée</option>
+                    <option value="delivered" <%= order.status === 'delivered' ? 'selected' : '' %>>Livrée</option>
+                    <option value="cancelled" <%= order.status === 'cancelled' ? 'selected' : '' %>>Annulée</option>
+                  </select>
+                  <select name="paymentStatus">
+                    <option value="pending" <%= order.paymentStatus === 'pending' ? 'selected' : '' %>>Paiement en attente</option>
+                    <option value="paid" <%= order.paymentStatus === 'paid' ? 'selected' : '' %>>Payée</option>
+                    <option value="refunded" <%= order.paymentStatus === 'refunded' ? 'selected' : '' %>>Remboursée</option>
+                  </select>
+                  <button class="btn orange small" type="submit">Mettre à jour</button>
+                </form>
+              </td>
+            </tr>
+          <% }) %>
+          <% if (!orders.length) { %><tr><td colspan="6">Aucune commande.</td></tr><% } %>
+        </tbody>
+      </table>
+    </div>
+  </main>
+</div>
+<%- include('../partials/footer') %>
