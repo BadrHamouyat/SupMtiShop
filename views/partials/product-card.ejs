@@ -1,17 +1,17 @@
-<div class="product-card modern-product-card">
+<div class="product-card modern-product-card <%= Number(product.stock) <= 0 ? 'is-out' : '' %>">
   <% const discount = getDiscountPercent(product); %>
   <% if (discount > 0) { %><span class="ribbon discount-ribbon">-<%= discount %>%</span><% } %>
-  <% if (Number(product.stock) <= 10) { %><span class="ribbon stock-ribbon">Stock faible</span><% } %>
+  <% if (Number(product.stock) <= 0) { %><span class="ribbon stock-ribbon">Épuisé</span><% } else if (Number(product.stock) <= 10) { %><span class="ribbon stock-ribbon">Stock faible</span><% } %>
   <a href="/product/<%= product.id %>">
     <div class="product-image">
       <img src="<%= product.image %>" alt="<%= product.title %>">
     </div>
   </a>
   <div class="product-body">
-    <span class="category-tag"><%= product.category %></span>
+    <span class="category-tag"><%= findCategoryIcon(product.category) %> <%= product.category %></span>
     <a class="product-title" href="/product/<%= product.id %>"><%= product.title %></a>
     <div class="product-meta">
-      <span>⭐ <%= product.rating %></span>
+      <span>⭐ <%= product.rating %> <%= product.reviewCount ? `(${product.reviewCount})` : '' %></span>
       <span><%= product.sold %> vendus</span>
     </div>
     <div class="price">
@@ -21,11 +21,21 @@
       <% } %>
     </div>
     <div class="card-actions">
-      <form action="/cart/add" method="POST">
-        <input type="hidden" name="productId" value="<%= product.id %>">
-        <input type="hidden" name="qty" value="1">
-        <button class="btn orange" type="submit">Ajouter</button>
-      </form>
+      <% if (Number(product.stock) > 0) { %>
+        <form action="/cart/add" method="POST">
+          <input type="hidden" name="productId" value="<%= product.id %>">
+          <input type="hidden" name="qty" value="1">
+          <button class="btn orange" type="submit">Ajouter</button>
+        </form>
+      <% } else { %>
+        <button class="btn danger" type="button" disabled>Épuisé</button>
+      <% } %>
+      <% if (currentUser && currentUser.role === 'client') { %>
+        <form action="/wishlist/toggle" method="POST">
+          <input type="hidden" name="productId" value="<%= product.id %>">
+          <button class="btn ghost wishlist-btn" type="submit"><%= isWishlisted(product.id) ? '♥' : '♡' %></button>
+        </form>
+      <% } %>
       <a class="btn ghost" href="/product/<%= product.id %>">Détails</a>
     </div>
   </div>

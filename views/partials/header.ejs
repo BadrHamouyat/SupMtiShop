@@ -14,42 +14,93 @@
     </div>
   </div>
 
-  <nav class="nav">
-    <div class="container nav-inner">
-      <a class="logo logo-image" href="/" aria-label="SupMtiShop">
+  <nav class="nav nav-modern">
+    <div class="container nav-inner nav-inner-modern">
+      <a class="logo logo-image brand-card" href="/" aria-label="SupMtiShop">
         <img src="/images/supmtishop-logo.png" alt="SupMtiShop">
       </a>
 
-      <form class="searchbar" method="GET" action="/products">
-        <input type="search" name="q" placeholder="Rechercher vos coups de cœur, marques, catégories..." value="<%= typeof query !== 'undefined' && query.q ? query.q : '' %>">
-        <button type="submit">🔎 Chercher</button>
+      <button class="mobile-menu-btn" type="button" data-nav-toggle aria-label="Ouvrir le menu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <form class="searchbar searchbar-modern" method="GET" action="/products">
+        <span class="search-icon" aria-hidden="true">⌕</span>
+        <input type="search" name="q" placeholder="Rechercher produits, catégories, accessoires..." value="<%= typeof query !== 'undefined' && query.q ? query.q : '' %>">
+        <button type="submit">Chercher</button>
       </form>
 
-      <div class="nav-actions">
-        <a href="/products">Produits</a>
-        <a href="/cart">Panier <%= cartCount ? `(${cartCount})` : '' %></a>
+      <div class="nav-actions nav-actions-modern" data-nav-menu>
+        <div class="nav-shop-tools" data-nav-tools>
+        <div class="category-mega" data-category-mega>
+          <button class="category-mega-trigger" type="button" data-category-mega-trigger aria-expanded="false">
+            <span class="category-mega-icon" aria-hidden="true">☰</span>
+            <span>Catégories</span>
+            <strong aria-hidden="true">⌄</strong>
+          </button>
+
+          <div class="category-mega-panel" data-category-mega-panel hidden>
+            <div class="category-mega-side">
+              <a class="category-side-link featured" href="/products">Toutes les catégories <span>›</span></a>
+              <% (navCategories || []).forEach(function(cat){ %>
+                <a class="category-side-link" href="/products?category=<%= encodeURIComponent(cat.name) %>">
+                  <span><%= cat.icon || '🛒' %> <%= cat.name %></span>
+                  <small><%= cat.count || 0 %></small>
+                </a>
+              <% }) %>
+            </div>
+
+            <div class="category-mega-content">
+              <div class="category-mega-title">
+                <strong>Explorer par catégorie</strong>
+                <span>Choisissez une famille de produits pour filtrer rapidement le catalogue.</span>
+              </div>
+              <div class="category-mega-grid">
+                <% (navCategories || []).forEach(function(cat){ %>
+                  <a class="category-mega-item" href="/products?category=<%= encodeURIComponent(cat.name) %>">
+                    <span class="category-mega-thumb">
+                      <% if (cat.image) { %>
+                        <img src="<%= cat.image %>" alt="<%= cat.name %>">
+                      <% } else { %>
+                        <em><%= cat.icon || '🛒' %></em>
+                      <% } %>
+                      <% if (cat.hot) { %><b>HOT</b><% } %>
+                    </span>
+                    <span class="category-mega-name"><%= cat.name %></span>
+                  </a>
+                <% }) %>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+
+        <a class="nav-link" href="/cart"><span class="nav-ico">🛒</span><span class="nav-text">Panier</span><% if (cartCount) { %><span class="count-badge"><%= cartCount %></span><% } %></a>
         <% if (currentUser) { %>
           <% if (currentUser.role === 'admin') { %>
-            <a href="/admin">Admin</a>
+            <a class="nav-link highlight" href="/admin"><span class="nav-ico">⚙️</span><span class="nav-text">Admin</span></a>
           <% } else { %>
-            <a href="/orders">Mes commandes</a>
+            <a class="nav-link" href="/wishlist"><span class="nav-ico">♡</span><span class="nav-text">Favoris</span><% if (wishlistCount) { %><span class="count-badge"><%= wishlistCount %></span><% } %></a>
+            <a class="nav-link" href="/orders"><span class="nav-ico">📦</span><span class="nav-text">Commandes</span></a>
+            <a class="nav-link" href="/profile"><span class="nav-ico">👤</span><span class="nav-text">Profil</span></a>
           <% } %>
-          <form action="/logout" method="POST">
-            <button type="submit">Déconnexion</button>
+          <form class="logout-inline" action="/logout" method="POST">
+            <button class="nav-link nav-link-danger" type="submit"><span class="nav-ico">⏻</span><span class="nav-text">Déconnexion</span></button>
           </form>
         <% } else { %>
-          <a href="/login">Connexion</a>
-          <a href="/register">Créer un compte</a>
+          <a class="nav-link" href="/login"><span class="nav-ico">🔐</span><span class="nav-text">Connexion</span></a>
+          <a class="nav-link highlight" href="/register"><span class="nav-ico">✨</span><span class="nav-text">Créer un compte</span></a>
         <% } %>
       </div>
     </div>
   </nav>
 
   <div class="container flash">
-    <% messages.success.forEach(function(msg){ %>
+    <% const flashMessages = (typeof messages !== 'undefined' && messages) ? messages : { success: [], error: [] }; %>
+    <% (flashMessages.success || []).forEach(function(msg){ %>
       <div class="success"><%= msg %></div>
     <% }) %>
-    <% messages.error.forEach(function(msg){ %>
+    <% (flashMessages.error || []).forEach(function(msg){ %>
       <div class="error"><%= msg %></div>
     <% }) %>
   </div>

@@ -4,9 +4,31 @@
   <div class="section-head">
     <div>
       <h2>Commande <%= order.reference %></h2>
-      <p>Statut: <span class="status <%= order.status %>"><%= order.status %></span></p>
+      <p>Statut: <span class="status <%= order.status %>"><%= statusLabel(order.status) %></span></p>
     </div>
-    <a class="btn ghost" href="/orders">Retour</a>
+    <div class="form-actions">
+      <a class="btn orange" href="/orders/<%= order.id %>/invoice">Télécharger facture PDF</a>
+      <a class="btn ghost" href="/orders">Retour</a>
+    </div>
+  </div>
+
+  <div class="card tracking-card">
+    <h2>Suivi de commande</h2>
+    <div class="tracking-steps">
+      <% getOrderTimeline(order).forEach(function(step){ %>
+        <div class="tracking-step <%= step.done ? 'done' : '' %> <%= step.active ? 'active' : '' %>">
+          <span></span>
+          <strong><%= step.label %></strong>
+        </div>
+      <% }) %>
+    </div>
+    <% if (order.statusHistory && order.statusHistory.length) { %>
+      <div class="status-history">
+        <% order.statusHistory.forEach(function(h){ %>
+          <small><strong><%= statusLabel(h.status) %></strong> — <%= new Date(h.at).toLocaleString('fr-FR') %> (<%= h.by %>)</small>
+        <% }) %>
+      </div>
+    <% } %>
   </div>
 
   <div class="checkout-grid">
@@ -32,8 +54,11 @@
       <p><strong>Téléphone:</strong> <%= order.customer.phone %></p>
       <p><strong>Adresse:</strong> <%= order.customer.address %>, <%= order.customer.city %></p>
       <p><strong>Paiement:</strong> <%= order.paymentMethod === 'online' ? 'En ligne' : 'À la livraison' %></p>
-      <p><strong>Statut paiement:</strong> <span class="status <%= order.paymentStatus %>"><%= order.paymentStatus %></span></p>
+      <p><strong>Statut paiement:</strong> <span class="status <%= order.paymentStatus %>"><%= paymentStatusLabel(order.paymentStatus) %></span></p>
       <% if (order.paymentReference) { %><p><strong>Référence paiement:</strong> <%= order.paymentReference %></p><% } %>
+      <div class="summary-line"><span>Sous-total</span><strong><%= formatPrice(order.subtotal) %></strong></div>
+      <div class="summary-line"><span>Livraison</span><strong><%= order.shipping ? formatPrice(order.shipping) : 'Gratuite' %></strong></div>
+      <div class="summary-line"><span>Réduction</span><strong>- <%= formatPrice(order.discount) %></strong></div>
       <div class="summary-line total"><span>Total</span><strong><%= formatPrice(order.total) %></strong></div>
     </div>
   </div>

@@ -1,0 +1,39 @@
+<%- include('partials/header') %>
+
+<main class="container info-page">
+  <div class="section-head">
+    <div>
+      <h2>Contact</h2>
+      <p>Envoyez une demande au support depuis votre compte client. Un administrateur pourra consulter et traiter votre message.</p>
+    </div>
+  </div>
+
+  <div class="contact-grid">
+    <form class="card modern-form" action="/contact" method="POST">
+      <div class="account-note">
+        <strong>Message envoyé avec votre compte client</strong>
+        <span><%= currentUser ? currentUser.name : '' %> • <%= currentUser ? currentUser.email : '' %></span>
+      </div>
+      <div class="form-grid">
+        <div class="full"><label>Sujet</label><input class="input" name="subject" required placeholder="Sujet du message"></div>
+        <div class="full"><label>Message</label><textarea name="message" required minlength="10" placeholder="Écrivez votre message..."></textarea></div>
+      </div>
+      <br>
+      <button class="btn orange" type="submit">Envoyer le message</button>
+    </form>
+
+    <aside class="card contact-card">
+      <h3>Support rapide</h3>
+      <p class="muted">Vous pouvez aussi contacter SupMtiShop directement sur WhatsApp.</p>
+      <a class="btn orange" target="_blank" rel="noopener" href="https://wa.me/212762878817?text=Bonjour%20SupMtiShop%2C%20j%27ai%20besoin%20d%27aide">WhatsApp +212 762 878 817</a>
+      <div class="contact-info-list">
+        <span>📍 Maroc</span>
+        <span>🛒 Boutique e-commerce</span>
+        <span>💬 Assistance client</span>
+        <span>🚚 Livraison selon la ville</span>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<%- include('partials/footer') %>

@@ -23,11 +23,32 @@
           <label class="upload-box" for="productImage">
             <input id="productImage" type="file" name="productImage" accept="image/*">
             <span class="upload-icon">⬆️</span>
-            <strong>Choisir une image depuis mon PC</strong>
+            <strong>Choisir une image principale depuis mon PC</strong>
             <small id="fileName">Aucun fichier choisi</small>
+          </label>
+          <label class="upload-box gallery-upload" for="galleryImages">
+            <input id="galleryImages" type="file" name="galleryImages" accept="image/*" multiple>
+            <span class="upload-icon">🖼️</span>
+            <strong>Ajouter des images galerie</strong>
+            <small id="galleryFileName">Maximum 6 images</small>
           </label>
         </div>
       </div>
+
+      <% if (product && product.gallery && product.gallery.length) { %>
+        <div class="existing-gallery card soft-card">
+          <h3>Galerie actuelle</h3>
+          <p class="muted">Décoche une image pour la supprimer de la galerie.</p>
+          <div class="gallery-admin-grid">
+            <% product.gallery.forEach(function(img){ %>
+              <label>
+                <img src="<%= img %>" alt="galerie">
+                <span><input type="checkbox" name="keepGallery" value="<%= img %>" checked> Garder</span>
+              </label>
+            <% }) %>
+          </div>
+        </div>
+      <% } %>
 
       <div class="form-grid modern-form">
         <div>

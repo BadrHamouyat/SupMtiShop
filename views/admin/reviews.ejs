@@ -1,0 +1,44 @@
+<%- include('../partials/header') %>
+<div class="admin-shell">
+  <%- include('../partials/admin-sidebar') %>
+  <main class="admin-main">
+    <div class="section-head">
+      <div>
+        <h2>Modération des avis clients</h2>
+        <p>Approuver, masquer ou supprimer les commentaires avant affichage public.</p>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Produit</th><th>Client</th><th>Note</th><th>Commentaire</th><th>Statut</th><th>Action</th></tr></thead>
+        <tbody>
+          <% reviews.forEach(function(review){ %>
+            <tr>
+              <td><%= review.product ? review.product.title : 'Produit supprimé' %></td>
+              <td><%= review.userName %><br><small><%= new Date(review.createdAt).toLocaleString('fr-FR') %></small></td>
+              <td><%= '★'.repeat(Number(review.rating)) %><%= '☆'.repeat(5 - Number(review.rating)) %></td>
+              <td><%= review.comment %></td>
+              <td><span class="status <%= review.status %>"><%= review.status %></span></td>
+              <td>
+                <form action="/admin/reviews/<%= review.id %>/status" method="POST" style="display:grid;gap:8px;min-width:150px">
+                  <select name="status">
+                    <option value="pending" <%= review.status === 'pending' ? 'selected' : '' %>>En attente</option>
+                    <option value="approved" <%= review.status === 'approved' ? 'selected' : '' %>>Approuvé</option>
+                    <option value="hidden" <%= review.status === 'hidden' ? 'selected' : '' %>>Masqué</option>
+                  </select>
+                  <button class="btn orange small" type="submit">Modifier</button>
+                </form>
+                <form action="/admin/reviews/<%= review.id %>?_method=DELETE" method="POST" style="margin-top:8px">
+                  <button class="btn danger small" data-confirm="Supprimer cet avis ?" type="submit">Supprimer</button>
+                </form>
+              </td>
+            </tr>
+          <% }) %>
+          <% if (!reviews.length) { %><tr><td colspan="6">Aucun avis.</td></tr><% } %>
+        </tbody>
+      </table>
+    </div>
+  </main>
+</div>
+<%- include('../partials/footer') %>

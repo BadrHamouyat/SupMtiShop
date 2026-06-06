@@ -1,0 +1,73 @@
+<%- include('../partials/header') %>
+<div class="admin-shell">
+  <%- include('../partials/admin-sidebar') %>
+  <main class="admin-main">
+    <div class="section-head">
+      <div>
+        <h2>Gestion des catégories</h2>
+        <p>Ajoutez, modifiez ou supprimez les catégories utilisées dans le catalogue.</p>
+      </div>
+    </div>
+
+    <form class="card form-grid modern-form" action="/admin/categories" method="POST">
+      <div><label>Nom catégorie</label><input class="input" name="name" placeholder="Ex: Téléphones" required></div>
+      <div class="icon-picker-field">
+        <label>Icône</label>
+        <input type="hidden" name="icon" value="🛒" data-icon-input>
+        <div class="icon-picker" data-icon-picker>
+          <button class="icon-picker-trigger" type="button" data-icon-trigger aria-expanded="false">
+            <span data-icon-display>🛒</span>
+            <span>Changer l'icône</span>
+          </button>
+          <div class="icon-picker-panel" data-icon-panel hidden>
+            <div class="icon-picker-title">Choisir une icône</div>
+            <% ['🛒','📱','💻','🎧','🎮','⌚','📺','🖨️','📷','🧴','👕','👟','🏠','🛋️','🚗','🔌','🍳','⚽','🎒','💡'].forEach(function(icon){ %>
+              <button class="icon-option" type="button" data-icon-option="<%= icon %>"><%= icon %></button>
+            <% }) %>
+          </div>
+        </div>
+      </div>
+      <div class="form-actions"><button class="btn orange" type="submit">Ajouter catégorie</button></div>
+    </form>
+
+    <div class="section-head"><h2>Liste des catégories</h2></div>
+    <div class="table-wrap category-table-wrap">
+      <table>
+        <thead><tr><th>Catégorie</th><th>Produits</th><th>Modifier</th><th>Supprimer</th></tr></thead>
+        <tbody>
+          <% categories.forEach(function(cat){ %>
+            <tr>
+              <td><strong><%= cat.icon || '🛒' %> <%= cat.name %></strong></td>
+              <td><%= counts[cat.name] || 0 %></td>
+              <td>
+                <form class="inline-edit category-edit-row" action="/admin/categories/<%= cat.id %>" method="POST">
+                  <input class="input" name="name" value="<%= cat.name %>" required>
+                  <input type="hidden" name="icon" value="<%= cat.icon || '🛒' %>" data-icon-input>
+                  <div class="icon-picker" data-icon-picker>
+                    <button class="icon-picker-trigger compact" type="button" data-icon-trigger aria-expanded="false">
+                      <span data-icon-display><%= cat.icon || '🛒' %></span>
+                      <span>Icône</span>
+                    </button>
+                    <div class="icon-picker-panel" data-icon-panel hidden>
+                      <div class="icon-picker-title">Choisir une icône</div>
+                      <% ['🛒','📱','💻','🎧','🎮','⌚','📺','🖨️','📷','🧴','👕','👟','🏠','🛋️','🚗','🔌','🍳','⚽','🎒','💡'].forEach(function(icon){ %>
+                        <button class="icon-option" type="button" data-icon-option="<%= icon %>"><%= icon %></button>
+                      <% }) %>
+                    </div>
+                  </div>
+                  <button class="btn orange small" type="submit">Sauver</button>
+                </form>
+              </td>
+              <td>
+                <form action="/admin/categories/<%= cat.id %>?_method=DELETE" method="POST">
+                  <button class="btn danger small" data-confirm="Supprimer cette catégorie ?" type="submit">Supprimer</button>
+                </form>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </main>
+</div>
+<%- include('../partials/footer') %>

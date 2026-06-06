@@ -2,8 +2,16 @@
 
 <main class="container detail-grid detail-modern">
   <div class="detail-image detail-gallery">
-    <span class="gallery-badge"><%= product.category %></span>
-    <img src="<%= product.image %>" alt="<%= product.title %>">
+    <span class="gallery-badge"><%= findCategoryIcon(product.category) %> <%= product.category %></span>
+    <img id="mainProductImage" src="<%= product.image %>" alt="<%= product.title %>">
+    <% const galleryImages = [product.image].concat(product.gallery || []); %>
+    <% if (galleryImages.length > 1) { %>
+      <div class="thumb-row">
+        <% galleryImages.forEach(function(img){ %>
+          <button type="button" class="thumb-btn" data-gallery-thumb="<%= img %>"><img src="<%= img %>" alt="image"></button>
+        <% }) %>
+      </div>
+    <% } %>
   </div>
 
   <div class="detail-info">
@@ -14,7 +22,7 @@
 
     <div class="product-meta detail-meta">
       <span>Catégorie: <strong><%= product.category %></strong></span>
-      <span>⭐ <%= reviewStats.average %> — <%= reviewStats.count %> avis — <%= product.sold %> vendus</span>
+      <span>⭐ <%= reviewStats.average %> — <%= reviewStats.count %> avis approuvés — <%= product.sold %> vendus</span>
     </div>
 
     <div class="price">
@@ -24,18 +32,25 @@
       <% } %>
     </div>
 
-    <div class="notice">✅ Stock disponible: <%= product.stock %> • Livraison gratuite dès 300 DH</div>
+    <% if (Number(product.stock) > 0) { %>
+      <div class="notice">✅ Stock disponible: <%= product.stock %> • Livraison par ville, gratuite dès 1000 DH</div>
+    <% } else { %>
+      <div class="notice danger-note">❌ Produit épuisé actuellement</div>
+    <% } %>
 
     <form action="/cart/add" method="POST">
       <input type="hidden" name="productId" value="<%= product.id %>">
       <div class="qty-box">
         <label for="qty"><strong>Quantité</strong></label>
-        <button class="qty-btn" type="button" data-qty-minus>-</button>
-        <input class="input" id="qty" type="number" min="1" max="<%= product.stock %>" name="qty" value="1">
-        <button class="qty-btn" type="button" data-qty-plus>+</button>
+        <button class="qty-btn" type="button" data-qty-minus <%= Number(product.stock) <= 0 ? 'disabled' : '' %>>-</button>
+        <input class="input" id="qty" type="number" min="1" max="<%= Math.max(1, product.stock) %>" name="qty" value="1" <%= Number(product.stock) <= 0 ? 'disabled' : '' %>>
+        <button class="qty-btn" type="button" data-qty-plus <%= Number(product.stock) <= 0 ? 'disabled' : '' %>>+</button>
       </div>
       <div class="form-actions product-actions">
-        <button class="btn orange" type="submit" name="redirectTo" value="cart">🛒 Ajouter au panier</button>
+        <button class="btn orange" type="submit" name="redirectTo" value="cart" <%= Number(product.stock) <= 0 ? 'disabled' : '' %>>🛒 Ajouter au panier</button>
+        <% if (currentUser && currentUser.role === 'client') { %>
+          <button class="btn ghost" formaction="/wishlist/toggle" formmethod="POST" type="submit"> <%= isWishlisted(product.id) ? '♥ Retirer des favoris' : '♡ Ajouter aux favoris' %></button>
+        <% } %>
         <a class="btn ghost" href="/products">Continuer mes achats</a>
       </div>
     </form>
@@ -46,7 +61,7 @@
   <div class="section-head">
     <div>
       <h2>Avis clients</h2>
-      <p>Les clients peuvent laisser une note et un commentaire sur chaque produit.</p>
+      <p>Les avis sont validés par l'administrateur avant affichage.</p>
     </div>
     <div class="rating-summary-pill">⭐ <%= reviewStats.average %>/5 · <%= reviewStats.count %> avis</div>
   </div>
@@ -57,7 +72,7 @@
       <div class="stars-display">
         <% for (let i = 1; i <= 5; i++) { %><span><%= i <= Math.round(reviewStats.average) ? '★' : '☆' %></span><% } %>
       </div>
-      <p class="muted"><%= reviewStats.count %> commentaire<%= reviewStats.count > 1 ? 's' : '' %> client<%= reviewStats.count > 1 ? 's' : '' %></p>
+      <p class="muted"><%= reviewStats.count %> commentaire<%= reviewStats.count > 1 ? 's' : '' %> approuvé<%= reviewStats.count > 1 ? 's' : '' %></p>
       <div class="rating-bars">
         <% reviewStats.breakdown.forEach(function(row){ %>
           <div class="rating-row">
@@ -71,22 +86,29 @@
 
     <div class="card review-form-card">
       <% if (currentUser && currentUser.role === 'client') { %>
-        <h3><%= userReview ? 'Modifier votre avis' : 'Ajouter votre avis' %></h3>
-        <form action="/products/<%= product.id %>/reviews" method="POST">
+        <% const editableReview = userReview && userReview.status !== 'pending' ? userReview : null; %>
+        <h3><%= editableReview ? 'Modifier votre avis' : 'Ajouter votre avis' %></h3>
+        <% if (typeof reviewPending !== 'undefined' && reviewPending) { %>
+          <p class="notice review-pending-flash">⏳ Votre avis est en attente de validation.</p>
+        <% } %>
+        <% if (userReview && userReview.status === 'hidden') { %><p class="notice danger-note">Votre avis a été masqué par l'administrateur. Vous pouvez envoyer un nouveau commentaire.</p><% } %>
+        <form action="/products/<%= product.id %>/reviews" method="POST" data-review-form>
           <label>Votre note</label>
           <div class="rating-input">
             <% for (let star = 5; star >= 1; star--) { %>
-              <input type="radio" id="star<%= star %>" name="rating" value="<%= star %>" <%= userReview && Number(userReview.rating) === star ? 'checked' : '' %> required>
+              <input type="radio" id="star<%= star %>" name="rating" value="<%= star %>" <%= editableReview && Number(editableReview.rating) === star ? 'checked' : '' %> required>
               <label for="star<%= star %>">★</label>
             <% } %>
           </div>
           <label>Votre commentaire</label>
-          <textarea name="comment" required minlength="3" placeholder="Exemple : produit de bonne qualité, livraison rapide..."><%= userReview ? userReview.comment : '' %></textarea>
-          <button class="btn orange" type="submit">Publier l'avis</button>
+          <textarea name="comment" required minlength="3" placeholder="Exemple : produit de bonne qualité, livraison rapide..."><%= editableReview ? editableReview.comment : '' %></textarea>
+          <button class="btn orange" type="submit">Envoyer l'avis</button>
         </form>
+        <p class="muted review-help-text">Après l’envoi, votre avis sera transmis à l’administrateur pour validation.</p>
       <% } else if (currentUser && currentUser.role === 'admin') { %>
         <h3>Mode administrateur</h3>
-        <p class="muted">Connectez-vous avec un compte client pour ajouter une note et un commentaire.</p>
+        <p class="muted">Gérez les avis depuis Admin → Avis clients.</p>
+        <a class="btn orange" href="/admin/reviews">Gérer les avis</a>
       <% } else { %>
         <h3>Donner votre avis</h3>
         <p class="muted">Connectez-vous ou créez un compte client pour ajouter une note et un commentaire.</p>
@@ -103,7 +125,7 @@
           <div class="review-head">
             <div>
               <strong><%= review.userName %></strong>
-              <p class="muted"><%= new Date(review.createdAt).toLocaleDateString('fr-FR') %></p>
+              <p class="muted"><%= new Date(review.createdAt).toLocaleDateString('fr-FR') %> <% if (review.verifiedPurchase) { %><span class="verified-badge">Achat vérifié</span><% } %></p>
             </div>
             <div class="review-stars">
               <% for (let i = 1; i <= 5; i++) { %><span><%= i <= Number(review.rating) ? '★' : '☆' %></span><% } %>
@@ -114,7 +136,7 @@
       <% }) %>
     <% } else { %>
       <div class="card empty-review">
-        <h3>Aucun avis pour le moment</h3>
+        <h3>Aucun avis approuvé pour le moment</h3>
         <p class="muted">Soyez le premier client à noter ce produit.</p>
       </div>
     <% } %>

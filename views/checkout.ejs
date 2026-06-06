@@ -4,7 +4,7 @@
   <div class="section-head">
     <div>
       <h2>Finaliser la commande</h2>
-      <p>Choisissez le mode de paiement et les informations de livraison.</p>
+      <p>Choisissez le mode de paiement, la livraison par ville et validez les conditions.</p>
     </div>
   </div>
 
@@ -13,15 +13,26 @@
       <div class="form-grid">
         <div>
           <label>Nom complet</label>
-          <input class="input" name="fullName" required value="<%= currentUser.name %>">
+          <input class="input" name="fullName" required value="<%= user.name || currentUser.name %>">
         </div>
         <div>
           <label>Téléphone</label>
-          <input class="input" name="phone" required placeholder="06 00 00 00 00">
+          <input class="input" name="phone" required placeholder="06 00 00 00 00" value="<%= user.phone || '' %>">
         </div>
         <div>
           <label>Ville</label>
-          <input class="input" name="city" required placeholder="Oujda, Taourirt, Rabat...">
+          <select name="city" id="citySelect" required>
+            <% const cities = ['Taourirt','Oujda','Rabat','Casablanca','Fès','Marrakech','Tanger','Agadir','Autre ville']; %>
+            <% cities.forEach(function(city){ %>
+              <option value="<%= city %>" <%= (user.city || selectedCity) === city ? 'selected' : '' %>><%= city %></option>
+            <% }) %>
+          </select>
+          <small class="form-help">Livraison estimée selon la ville.</small>
+        </div>
+        <div>
+          <label>Code promo</label>
+          <input class="input" name="couponCode" placeholder="SUPMTI10, WELCOME20, LIVRAISON" value="<%= couponCode || '' %>">
+          <small class="form-help">Coupons disponibles : SUPMTI10, WELCOME20, LIVRAISON</small>
         </div>
         <div>
           <label>Mode de paiement</label>
@@ -33,32 +44,21 @@
         <div class="full online-payment-fields" id="onlinePaymentFields">
           <div class="online-payment-head">
             <strong>💳 Paiement en ligne sécurisé</strong>
-            <span>Total: <%= formatPrice(total) %></span>
+            <span>Total estimé: <%= formatPrice(total) %></span>
           </div>
           <div class="form-grid compact-grid">
-            <div>
-              <label>Nom sur la carte</label>
-              <input class="input" name="cardName" placeholder="Badr Hamouyat" data-online-field>
-            </div>
-            <div>
-              <label>Numéro de carte</label>
-              <input class="input" name="cardNumber" inputmode="numeric" placeholder="4242 4242 4242 4242" data-online-field>
-            </div>
-            <div>
-              <label>Expiration</label>
-              <input class="input" name="cardExpiry" placeholder="MM/AA" data-online-field>
-            </div>
-            <div>
-              <label>CVV</label>
-              <input class="input" name="cardCvc" inputmode="numeric" placeholder="123" data-online-field>
-            </div>
+            <div><label>Nom sur la carte</label><input class="input" name="cardName" placeholder="Badr Hamouyat" data-online-field></div>
+            <div><label>Numéro de carte</label><input class="input" name="cardNumber" inputmode="numeric" placeholder="4242 4242 4242 4242" data-online-field></div>
+            <div><label>Expiration</label><input class="input" name="cardExpiry" placeholder="MM/AA" data-online-field></div>
+            <div><label>CVV</label><input class="input" name="cardCvc" inputmode="numeric" placeholder="123" data-online-field></div>
           </div>
-          <p class="muted secure-note">Les données complètes de la carte ne sont pas enregistrées dans la base.</p>
+          <p class="muted secure-note">Les données complètes de la carte ne sont pas enregistrées dans la base JSON.</p>
         </div>
         <div class="full">
           <label>Adresse complète</label>
-          <textarea name="address" required placeholder="Adresse, quartier, numéro..."></textarea>
+          <textarea name="address" required placeholder="Adresse, quartier, numéro..."><%= user.address || '' %></textarea>
         </div>
+        <label class="full terms-line"><input type="checkbox" name="acceptTerms" required> J'accepte les conditions de vente, livraison et retour.</label>
       </div>
       <br>
       <button class="btn orange" type="submit">Confirmer la commande</button>
@@ -72,10 +72,16 @@
           <strong><%= formatPrice(item.subtotal) %></strong>
         </div>
       <% }) %>
-      <div class="summary-line"><span>Livraison</span><strong><%= shipping ? formatPrice(shipping) : 'Gratuite' %></strong></div>
-      <div class="summary-line"><span>Réduction</span><strong>- <%= formatPrice(discount) %></strong></div>
-      <div class="summary-line total"><span>Total</span><strong><%= formatPrice(total) %></strong></div>
-      <div class="notice">Après confirmation, vous recevrez le résumé de votre commande et les informations de suivi.</div>
+      <div class="summary-line"><span>Livraison estimée</span><strong><%= shipping ? formatPrice(shipping) : 'Gratuite' %></strong></div>
+      <div class="summary-line"><span>Réduction automatique</span><strong>- <%= formatPrice(autoDiscount || 0) %></strong></div>
+      <div class="summary-line"><span>Coupon <%= coupon ? coupon.code : '' %></span><strong>- <%= formatPrice(couponDiscount || 0) %></strong></div>
+      <% if (coupon) { %><div class="notice coupon-notice">🎁 Coupon appliqué : <%= coupon.description %></div><% } %>
+      <div class="summary-line total"><span>Total estimé</span><strong><%= formatPrice(total) %></strong></div>
+      <div class="delivery-table">
+        <h3>Prix livraison</h3>
+        <p>Taourirt/Oujda: 20 DH · Grandes villes: 35/40 DH · Autres villes: 45 DH · Gratuit dès 1000 DH.</p>
+      </div>
+      <div class="notice">Après confirmation, vous recevrez le résumé de votre commande, le suivi et la facture PDF.</div>
     </div>
   </div>
 </main>

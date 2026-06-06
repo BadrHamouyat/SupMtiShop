@@ -18,8 +18,8 @@
               <td><strong><%= order.reference %></strong><br><small><%= new Date(order.createdAt).toLocaleString('fr-FR') %></small></td>
               <td><%= order.customer.fullName %><br><small><%= order.customer.phone %> — <%= order.customer.city %></small></td>
               <td><%= formatPrice(order.total) %></td>
-              <td><span class="status <%= order.paymentStatus %>"><%= order.paymentStatus %></span></td>
-              <td><span class="status <%= order.status %>"><%= order.status %></span></td>
+              <td><span class="status <%= order.paymentStatus %>"><%= paymentStatusLabel(order.paymentStatus) %></span></td>
+              <td><span class="status <%= order.status %>"><%= statusLabel(order.status) %></span></td>
               <td>
                 <form action="/admin/orders/<%= order.id %>/status" method="POST" style="display:grid;gap:8px;min-width:230px">
                   <select name="status">

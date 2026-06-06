@@ -4,33 +4,58 @@
   <div class="section-head">
     <div>
       <h2>Tous les produits</h2>
-      <p>Recherche, catégories, prix maximum et tri.</p>
+      <p>Recherche avancée : catégorie, prix, note, réduction, disponibilité et tri.</p>
     </div>
   </div>
 
   <div class="card filter-card">
-    <form class="filters" method="GET" action="/products">
+    <form class="filters advanced-filters" method="GET" action="/products">
       <input class="input" type="search" name="q" placeholder="Nom du produit..." value="<%= query.q || '' %>">
       <select name="category">
         <option value="">Toutes catégories</option>
         <% categories.forEach(function(cat){ %>
-          <option value="<%= cat %>" <%= query.category === cat ? 'selected' : '' %>><%= cat %></option>
+          <option value="<%= cat %>" <%= query.category === cat ? 'selected' : '' %>><%= findCategoryIcon(cat) %> <%= cat %></option>
         <% }) %>
       </select>
+      <input class="input" type="number" name="min" placeholder="Prix min" value="<%= query.min || '' %>">
       <input class="input" type="number" name="max" placeholder="Prix max" value="<%= query.max || '' %>">
+      <select name="rating">
+        <option value="">Toutes les notes</option>
+        <option value="4" <%= query.rating === '4' ? 'selected' : '' %>>⭐ 4+ étoiles</option>
+        <option value="3" <%= query.rating === '3' ? 'selected' : '' %>>⭐ 3+ étoiles</option>
+      </select>
+      <select name="discount">
+        <option value="">Toutes réductions</option>
+        <option value="10" <%= query.discount === '10' ? 'selected' : '' %>>-10% et plus</option>
+        <option value="20" <%= query.discount === '20' ? 'selected' : '' %>>-20% et plus</option>
+        <option value="30" <%= query.discount === '30' ? 'selected' : '' %>>-30% et plus</option>
+      </select>
+      <select name="availability">
+        <option value="">Disponibilité</option>
+        <option value="in_stock" <%= query.availability === 'in_stock' ? 'selected' : '' %>>En stock</option>
+        <option value="out" <%= query.availability === 'out' ? 'selected' : '' %>>Épuisé</option>
+      </select>
       <select name="sort">
         <option value="">Tri normal</option>
+        <option value="newest" <%= query.sort === 'newest' ? 'selected' : '' %>>Nouveautés</option>
         <option value="price_asc" <%= query.sort === 'price_asc' ? 'selected' : '' %>>Prix croissant</option>
         <option value="price_desc" <%= query.sort === 'price_desc' ? 'selected' : '' %>>Prix décroissant</option>
         <option value="rating" <%= query.sort === 'rating' ? 'selected' : '' %>>Meilleures notes</option>
         <option value="sold" <%= query.sort === 'sold' ? 'selected' : '' %>>Top ventes</option>
+        <option value="discount" <%= query.sort === 'discount' ? 'selected' : '' %>>Meilleures réductions</option>
       </select>
       <button class="btn orange" type="submit">Filtrer</button>
+      <a class="btn ghost" href="/products">Réinitialiser</a>
     </form>
   </div>
 
   <% if (!products.length) { %>
-    <div class="empty">Aucun produit trouvé.</div>
+    <div class="empty empty-state-card">
+      <span class="empty-icon">🔎</span>
+      <h3>Aucun produit ne correspond à votre recherche.</h3>
+      <p>Essayez une autre catégorie, modifiez vos filtres ou utilisez l’assistant produit.</p>
+      <a class="btn orange" href="/products">Réinitialiser la recherche</a>
+    </div>
   <% } else { %>
     <div class="product-grid">
       <% products.forEach(function(product){ %>

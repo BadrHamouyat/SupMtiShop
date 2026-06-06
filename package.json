@@ -1,7 +1,7 @@
 {
   "name": "supmtishop-professional-ecommerce",
   "version": "1.0.0",
-  "description": "Boutique e-commerce moderne avec compte client, administrateur, panier, commandes et upload images produits",
+  "description": "SupMtiShop e-commerce professionnel avec JSON database, admin, clients, panier, commandes, favoris, avis, factures PDF et suivi livraison",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -14,7 +14,9 @@
     "express": "^4.19.2",
     "express-session": "^1.18.0",
     "method-override": "^3.0.0",
-    "multer": "^2.1.1"
+    "multer": "^2.1.1",
+    "pdfkit": "^0.15.0",
+    "dotenv": "^16.4.5"
   },
   "devDependencies": {
     "nodemon": "^3.1.4"

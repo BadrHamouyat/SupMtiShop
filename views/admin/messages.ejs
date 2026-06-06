@@ -1,0 +1,74 @@
+<%- include('../partials/header') %>
+<div class="admin-shell">
+  <%- include('../partials/admin-sidebar') %>
+  <main class="admin-main">
+    <div class="section-head">
+      <div>
+        <h2>Messages contact</h2>
+        <p>Consultez les demandes envoyées par les clients depuis la page Contact.</p>
+      </div>
+    </div>
+
+    <div class="stats-grid">
+      <a class="stat-card" href="/admin/messages"><span>Total</span><strong><%= counts.all %></strong></a>
+      <a class="stat-card" href="/admin/messages?status=new"><span>Nouveaux</span><strong><%= counts.new %></strong></a>
+      <a class="stat-card" href="/admin/messages?status=read"><span>Lus</span><strong><%= counts.read %></strong></a>
+      <a class="stat-card" href="/admin/messages?status=replied"><span>Répondus</span><strong><%= counts.replied %></strong></a>
+    </div>
+
+    <div class="card" style="margin-top:18px">
+      <div class="filter-pills">
+        <a class="pill <%= status === 'all' ? 'active' : '' %>" href="/admin/messages">Tous</a>
+        <a class="pill <%= status === 'new' ? 'active' : '' %>" href="/admin/messages?status=new">Nouveaux</a>
+        <a class="pill <%= status === 'read' ? 'active' : '' %>" href="/admin/messages?status=read">Lus</a>
+        <a class="pill <%= status === 'replied' ? 'active' : '' %>" href="/admin/messages?status=replied">Répondus</a>
+      </div>
+    </div>
+
+    <div class="table-wrap" style="margin-top:18px">
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Client</th>
+            <th>Sujet</th>
+            <th>Message</th>
+            <th>Statut</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% (contactMessages || []).forEach(function(msg){ %>
+            <tr>
+              <td><%= new Date(msg.createdAt).toLocaleString('fr-FR') %></td>
+              <td>
+                <strong><%= msg.name %></strong><br>
+                <a href="mailto:<%= msg.email %>"><%= msg.email %></a>
+              </td>
+              <td><strong><%= msg.subject %></strong></td>
+              <td style="max-width:420px;white-space:pre-wrap"><%= msg.message %></td>
+              <td><span class="status <%= msg.status %>"><%= msg.status === 'new' ? 'Nouveau' : msg.status === 'read' ? 'Lu' : 'Répondu' %></span></td>
+              <td>
+                <form action="/admin/messages/<%= msg.id %>/status" method="POST" style="display:grid;gap:8px;min-width:150px">
+                  <select name="status">
+                    <option value="new" <%= msg.status === 'new' ? 'selected' : '' %>>Nouveau</option>
+                    <option value="read" <%= msg.status === 'read' ? 'selected' : '' %>>Lu</option>
+                    <option value="replied" <%= msg.status === 'replied' ? 'selected' : '' %>>Répondu</option>
+                  </select>
+                  <button class="btn orange small" type="submit">Modifier</button>
+                </form>
+                <form action="/admin/messages/<%= msg.id %>?_method=DELETE" method="POST" style="margin-top:8px">
+                  <button class="btn danger small" data-confirm="Supprimer ce message ?" type="submit">Supprimer</button>
+                </form>
+              </td>
+            </tr>
+          <% }) %>
+          <% if (!(contactMessages || []).length) { %>
+            <tr><td colspan="6">Aucun message contact trouvé.</td></tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  </main>
+</div>
+<%- include('../partials/footer') %>

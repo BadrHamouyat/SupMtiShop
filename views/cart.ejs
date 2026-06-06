@@ -9,9 +9,11 @@
   </div>
 
   <% if (!items.length) { %>
-    <div class="empty">
-      Votre panier est vide.<br><br>
-      <a class="btn orange" href="/products">Voir les produits</a>
+    <div class="empty empty-state-card">
+      <span class="empty-icon">🛒</span>
+      <h3>Votre panier est vide.</h3>
+      <p>Découvrez nos produits et ajoutez vos articles préférés pour préparer votre commande.</p>
+      <a class="btn orange" href="/products">Découvrir les produits</a>
     </div>
   <% } else { %>
     <div class="cart-grid">

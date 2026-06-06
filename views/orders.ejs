@@ -20,8 +20,8 @@
               <td><strong><%= order.reference %></strong></td>
               <td><%= new Date(order.createdAt).toLocaleString('fr-FR') %></td>
               <td><%= formatPrice(order.total) %></td>
-              <td><span class="status <%= order.paymentStatus %>"><%= order.paymentStatus %></span></td>
-              <td><span class="status <%= order.status %>"><%= order.status %></span></td>
+              <td><span class="status <%= order.paymentStatus %>"><%= paymentStatusLabel(order.paymentStatus) %></span></td>
+              <td><span class="status <%= order.status %>"><%= statusLabel(order.status) %></span></td>
               <td><a class="btn ghost small" href="/orders/<%= order.id %>">Détails</a></td>
             </tr>
           <% }) %>

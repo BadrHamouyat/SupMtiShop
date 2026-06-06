@@ -1,0 +1,30 @@
+<%- include('partials/header') %>
+
+<main class="container">
+  <div class="section-head">
+    <div>
+      <h2>Mon profil</h2>
+      <p>Modifiez vos informations personnelles, livraison et mot de passe.</p>
+    </div>
+  </div>
+
+  <form class="card profile-card" action="/profile" method="POST">
+    <div class="form-grid modern-form">
+      <div><label>Nom complet</label><input class="input" name="name" required value="<%= user.name %>"></div>
+      <div><label>Email</label><input class="input" value="<%= user.email %>" disabled></div>
+      <div><label>Téléphone</label><input class="input" name="phone" value="<%= user.phone || '' %>" placeholder="06 00 00 00 00"></div>
+      <div><label>Ville</label><input class="input" name="city" value="<%= user.city || '' %>" placeholder="Taourirt"></div>
+      <div class="full"><label>Adresse</label><textarea name="address" placeholder="Adresse complète"><%= user.address || '' %></textarea></div>
+    </div>
+
+    <div class="section-head"><h2>Sécurité</h2></div>
+    <div class="form-grid modern-form">
+      <div><label>Mot de passe actuel</label><input class="input" type="password" name="currentPassword" placeholder="Seulement si vous changez le mot de passe"></div>
+      <div><label>Nouveau mot de passe</label><input class="input" type="password" name="newPassword" placeholder="8 caractères + lettre + chiffre"></div>
+    </div>
+    <br>
+    <button class="btn orange" type="submit">Sauvegarder le profil</button>
+  </form>
+</main>
+
+<%- include('partials/footer') %>

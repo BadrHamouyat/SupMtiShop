@@ -5,16 +5,92 @@
     <div class="section-head">
       <div>
         <h2>Dashboard administrateur</h2>
-        <p>Résumé de la boutique. Le chiffre d'affaires compte seulement les commandes payées.</p>
+        <p>Résumé professionnel de la boutique. Le chiffre d'affaires compte seulement les commandes payées.</p>
       </div>
     </div>
 
-    <div class="stats-grid">
+    <div class="stats-grid extended-stats">
       <div class="stat-card"><span>Produits</span><strong><%= stats.products %></strong></div>
       <div class="stat-card"><span>Clients</span><strong><%= stats.users %></strong></div>
+      <div class="stat-card"><span>Nouveaux clients/mois</span><strong><%= stats.newClientsThisMonth %></strong></div>
       <div class="stat-card"><span>Commandes</span><strong><%= stats.orders %></strong></div>
       <div class="stat-card"><span>Commandes payées</span><strong><%= stats.paidOrders %></strong></div>
+      <div class="stat-card"><span>Annulées</span><strong><%= stats.cancelledOrders %></strong></div>
+      <div class="stat-card"><span>Stock faible</span><strong><%= stats.lowStockCount %></strong></div>
+      <div class="stat-card"><span>Avis en attente</span><strong><%= stats.pendingReviews %></strong></div>
+      <div class="stat-card"><span>Messages contact</span><strong><%= stats.contactMessages %></strong></div>
       <div class="stat-card"><span>Chiffre d'affaires payé</span><strong><%= formatPrice(stats.revenue) %></strong></div>
+    </div>
+
+    <div class="card export-card">
+      <div>
+        <h3>Exports administrateur</h3>
+        <p class="muted">Téléchargez les données principales pour le rapport ou le suivi.</p>
+      </div>
+      <div class="export-actions">
+        <a class="btn ghost small" href="/admin/export/orders.csv">Commandes CSV</a>
+        <a class="btn ghost small" href="/admin/export/products.csv">Produits CSV</a>
+        <a class="btn ghost small" href="/admin/export/users.csv">Clients CSV</a>
+      </div>
+    </div>
+
+    <div class="admin-two-cols">
+      <section>
+        <div class="section-head"><h2>Produits les plus vendus</h2></div>
+        <div class="card chart-card">
+          <% const maxSold = Math.max(1, ...bestProducts.map(p => Number(p.sold || 0))); %>
+          <% bestProducts.forEach(function(product){ %>
+            <div class="bar-line">
+              <span><%= product.title %></span>
+              <div class="bar"><i style="width:<%= (Number(product.sold || 0) / maxSold) * 100 %>%"></i></div>
+              <strong><%= product.sold || 0 %></strong>
+            </div>
+          <% }) %>
+        </div>
+      </section>
+      <section>
+        <div class="section-head"><h2>Top catégories</h2></div>
+        <div class="card chart-card">
+          <% const maxCat = Math.max(1, ...topCategories.map(c => c.count)); %>
+          <% topCategories.forEach(function(cat){ %>
+            <div class="bar-line">
+              <span><%= cat.icon %> <%= cat.name %></span>
+              <div class="bar"><i style="width:<%= (cat.count / maxCat) * 100 %>%"></i></div>
+              <strong><%= cat.count %></strong>
+            </div>
+          <% }) %>
+        </div>
+      </section>
+    </div>
+
+    <div class="admin-two-cols">
+      <section>
+        <div class="section-head"><h2>Commandes par statut</h2></div>
+        <div class="card chart-card">
+          <% const maxStatus = Math.max(1, ...orderStatusCounts.map(s => s.count)); %>
+          <% orderStatusCounts.forEach(function(row){ %>
+            <div class="bar-line">
+              <span><%= row.label %></span>
+              <div class="bar"><i style="width:<%= (row.count / maxStatus) * 100 %>%"></i></div>
+              <strong><%= row.count %></strong>
+            </div>
+          <% }) %>
+        </div>
+      </section>
+      <section>
+        <div class="section-head"><h2>Ventes par mois</h2></div>
+        <div class="card chart-card">
+          <% const maxMonth = Math.max(1, ...monthlyRevenueChart.map(m => m.total)); %>
+          <% monthlyRevenueChart.forEach(function(row){ %>
+            <div class="bar-line">
+              <span><%= row.month %></span>
+              <div class="bar"><i style="width:<%= (row.total / maxMonth) * 100 %>%"></i></div>
+              <strong><%= formatPrice(row.total) %></strong>
+            </div>
+          <% }) %>
+          <% if (!monthlyRevenueChart.length) { %><p class="muted">Aucune vente payée pour le moment.</p><% } %>
+        </div>
+      </section>
     </div>
 
     <div class="section-head">
@@ -30,7 +106,7 @@
               <td><%= order.reference %></td>
               <td><%= order.customer.fullName %></td>
               <td><%= formatPrice(order.total) %></td>
-              <td><span class="status <%= order.status %>"><%= order.status %></span></td>
+              <td><span class="status <%= order.status %>"><%= statusLabel(order.status) %></span></td>
             </tr>
           <% }) %>
           <% if (!latestOrders.length) { %><tr><td colspan="4">Aucune commande.</td></tr><% } %>
@@ -43,12 +119,12 @@
     </div>
     <div class="table-wrap">
       <table>
-        <thead><tr><th>Produit</th><th>Stock</th><th>Catégorie</th></tr></thead>
+        <thead><tr><th>Produit</th><th>Stock</th><th>Catégorie</th><th>Action</th></tr></thead>
         <tbody>
           <% lowStock.forEach(function(product){ %>
-            <tr><td><%= product.title %></td><td><%= product.stock %></td><td><%= product.category %></td></tr>
+            <tr><td><%= product.title %></td><td><strong><%= product.stock %></strong></td><td><%= product.category %></td><td><a class="btn ghost small" href="/admin/products/<%= product.id %>/edit">Modifier</a></td></tr>
           <% }) %>
-          <% if (!lowStock.length) { %><tr><td colspan="3">Aucun stock faible.</td></tr><% } %>
+          <% if (!lowStock.length) { %><tr><td colspan="4">Aucun stock faible.</td></tr><% } %>
         </tbody>
       </table>
     </div>

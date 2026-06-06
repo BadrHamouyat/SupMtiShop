@@ -1,0 +1,28 @@
+<%- include('partials/header') %>
+
+<main class="container">
+  <div class="section-head">
+    <div>
+      <h2>Mes favoris</h2>
+      <p>Produits enregistrés pour les acheter plus tard.</p>
+    </div>
+    <a class="btn ghost" href="/products">Continuer mes achats</a>
+  </div>
+
+  <% if (!products.length) { %>
+    <div class="empty empty-state-card">
+      <span class="empty-icon">💙</span>
+      <h3>Aucun favori pour le moment.</h3>
+      <p>Ajoutez des produits à vos favoris pour les retrouver facilement plus tard.</p>
+      <a class="btn orange" href="/products">Voir les produits</a>
+    </div>
+  <% } else { %>
+    <div class="product-grid">
+      <% products.forEach(function(product){ %>
+        <%- include('partials/product-card', { product }) %>
+      <% }) %>
+    </div>
+  <% } %>
+</main>
+
+<%- include('partials/footer') %>

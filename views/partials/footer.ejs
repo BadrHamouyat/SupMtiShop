@@ -1,38 +1,119 @@
-<footer class="footer">
-  <div class="container footer-grid">
+<footer class="footer modern-footer">
+  <div class="container footer-cta">
     <div>
+      <span class="footer-kicker">SupMtiShop</span>
+      <h3>Une expérience e-commerce moderne, fluide et orientée client.</h3>
+      <p>Explorez un catalogue organisé, profitez d’offres sélectionnées et suivez vos commandes avec un service client accessible à tout moment.</p>
+    </div>
+  </div>
+
+  <div class="container footer-grid footer-grid-pro">
+    <div class="footer-brand-card">
       <a class="footer-logo-wrap" href="/" aria-label="SupMtiShop">
         <img class="footer-logo-image" src="/images/supmtishop-logo.png" alt="SupMtiShop">
       </a>
-      <p>SupMtiShop vous propose une expérience d'achat moderne, un catalogue varié et un service client rapide pour simplifier vos commandes.</p>
+      <p>SupMtiShop propose une expérience d'achat moderne avec un catalogue varié, des promotions, un panier simple et un suivi de commande clair.</p>
+      <div class="footer-trust">
+        <span>Livraison Maroc</span>
+        <span>Support rapide</span>
+        <span>Prix réduits</span>
+      </div>
     </div>
-    <div>
+
+    <div class="footer-col">
       <h4>Boutique</h4>
+      <a href="/products">Tous les produits</a>
       <a href="/products?sort=sold">Top ventes</a>
       <a href="/products?sort=price_asc">Meilleurs prix</a>
-      <a href="/products">Nouveautés</a>
+      <a href="/products?discount=1">Promotions</a>
+      <a href="/about">À propos</a>
     </div>
-    <div>
-      <h4>Service client</h4>
+
+    <div class="footer-col">
+      <h4>Mon compte</h4>
       <a href="/cart">Panier</a>
+      <a href="/wishlist">Favoris</a>
       <a href="/orders">Mes commandes</a>
-      <a href="https://wa.me/212762878817" target="_blank" rel="noopener">WhatsApp</a>
+      <a href="/profile">Profil</a>
+      <a href="/faq">FAQ</a>
+      <a href="/returns">Retours</a>
     </div>
-    <div>
-      <h4>Promesse</h4>
-      <p>Design moderne, commandes simples, paiement pratique et livraison partout au Maroc.</p>
+
+    <div class="footer-col footer-contact">
+      <h4>Contact</h4>
+      <a href="/contact">Page contact</a>
+      <a href="https://wa.me/212762878817" target="_blank" rel="noopener">WhatsApp : +212 762 878 817</a>
+      <span>Service client disponible</span>
+      <span>Paiement à la livraison ou en ligne</span>
+      <span>Livraison selon votre ville</span>
     </div>
   </div>
-  <div class="container footer-bottom">
-    <span>© SupMtiShop. Tous droits réservés.</span>
-    <span>Supported by SupMti</span>
+
+  <div class="container footer-promise-grid">
+    <div>
+      <strong>Catalogue sélectionné</strong>
+      <span>Des produits organisés par catégories avec des offres claires et faciles à comparer.</span>
+    </div>
+    <div>
+      <strong>Commande simplifiée</strong>
+      <span>Un panier clair, un checkout rapide et un suivi de commande accessible au client.</span>
+    </div>
+    <div>
+      <strong>Assistance client</strong>
+      <span>Chatbot, WhatsApp et pages d’aide pour accompagner le client dans son achat.</span>
+    </div>
+  </div>
+
+  <div class="container footer-bottom footer-bottom-pro footer-bottom-single">
+    <span>© <%= new Date().getFullYear() %> SupMtiShop. Tous droits réservés.</span>
   </div>
 </footer>
-<a class="whatsapp-float" href="https://wa.me/212762878817?text=Bonjour%20SupMtiShop%2C%20je%20veux%20des%20informations%20sur%20vos%20produits" target="_blank" rel="noopener" aria-label="Contacter SupMtiShop sur WhatsApp">
+<a class="whatsapp-float"
+  href="https://wa.me/212762878817?text=Bonjour%20SupMtiShop%2C%20je%20veux%20des%20informations%20sur%20vos%20produits"
+  target="_blank" rel="noopener" aria-label="Contacter SupMtiShop sur WhatsApp">
   <svg viewBox="0 0 32 32" aria-hidden="true">
-    <path d="M16 3.2A12.7 12.7 0 0 0 5 22.3L3.5 28.8l6.7-1.6A12.7 12.7 0 1 0 16 3.2Zm0 23.1c-2 0-3.8-.6-5.4-1.6l-.4-.2-4 .9.9-3.9-.3-.4A10.3 10.3 0 1 1 16 26.3Zm5.8-7.8c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.6c.2-.2.2-.3.3-.5.1-.2.1-.4 0-.6-.1-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.6s1.1 3 1.3 3.2c.2.2 2.2 3.4 5.4 4.8.8.3 1.4.5 1.9.7.8.2 1.5.2 2 .1.6-.1 1.9-.8 2.1-1.5.3-.7.3-1.4.2-1.5-.1-.1-.3-.2-.6-.4Z"/>
+    <path
+      d="M16 3.2A12.7 12.7 0 0 0 5 22.3L3.5 28.8l6.7-1.6A12.7 12.7 0 1 0 16 3.2Zm0 23.1c-2 0-3.8-.6-5.4-1.6l-.4-.2-4 .9.9-3.9-.3-.4A10.3 10.3 0 1 1 16 26.3Zm5.8-7.8c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.6c.2-.2.2-.3.3-.5.1-.2.1-.4 0-.6-.1-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.6s1.1 3 1.3 3.2c.2.2 2.2 3.4 5.4 4.8.8.3 1.4.5 1.9.7.8.2 1.5.2 2 .1.6-.1 1.9-.8 2.1-1.5.3-.7.3-1.4.2-1.5-.1-.1-.3-.2-.6-.4Z" />
   </svg>
 </a>
+
+<div class="shopbot" data-shopbot>
+  <button class="shopbot-toggle" type="button" data-shopbot-toggle aria-expanded="false">
+    <span class="shopbot-toggle-icon">💬</span>
+    <span>Assistant produit</span>
+  </button>
+
+  <section class="shopbot-window" data-shopbot-window hidden aria-label="Assistant produit SupMtiShop">
+    <div class="shopbot-head">
+      <div>
+        <strong>Assistant SupMtiShop</strong>
+        <span>Je vous aide à trouver un produit</span>
+      </div>
+      <button class="shopbot-close" type="button" data-shopbot-close aria-label="Fermer l'assistant">×</button>
+    </div>
+
+    <div class="shopbot-messages" data-shopbot-messages>
+      <div class="shopbot-msg bot">
+        Bonjour 👋 Je peux vous aider à trouver rapidement un produit. Essayez : <strong>casque gaming</strong>, <strong>produit moins de 500 DH</strong>, <strong>promotions</strong> ou choisissez une suggestion.
+      </div>
+      <div class="shopbot-chips">
+        <button type="button" data-shopbot-chip="promotions">Promotions</button>
+        <button type="button" data-shopbot-chip="produits gaming">Gaming</button>
+        <button type="button" data-shopbot-chip="accessoires audio">Accessoires audio</button>
+        <button type="button" data-shopbot-chip="maison moins de 300 DH">Maison -300 DH</button>
+        <button type="button" data-shopbot-chip="produits disponibles">En stock</button>
+        <button type="button" data-shopbot-chip="top ventes">Top ventes</button>
+      </div>
+    </div>
+
+    <form class="shopbot-form" data-shopbot-form>
+      <input type="text" data-shopbot-input placeholder="Ex: casque en stock" autocomplete="off" required>
+      <button type="submit">Envoyer</button>
+    </form>
+  </section>
+</div>
+
 <script src="/js/app.js"></script>
 </body>
+
 </html>

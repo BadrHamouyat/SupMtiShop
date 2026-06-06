@@ -6,7 +6,10 @@
       "email": "admin@market.ma",
       "passwordHash": "$2a$10$itqc2xIO6iBMEjCULf.QTO6WW6ECgEljZB8eWCT7X.B1kc93eYwsi",
       "role": "admin",
-      "createdAt": "2026-05-16T12:02:07.178Z"
+      "createdAt": "2026-05-16T12:02:07.178Z",
+      "phone": "",
+      "city": "",
+      "address": ""
     },
     {
       "id": 2,
@@ -14,35 +17,93 @@
       "email": "client@market.ma",
       "passwordHash": "$2a$10$Q9r5CsbablRx8RpQ90phA.g6gGAIIC70JPGPoiMPWpysFAYLGqsla",
       "role": "client",
-      "createdAt": "2026-05-16T12:02:07.178Z"
+      "createdAt": "2026-05-16T12:02:07.178Z",
+      "phone": "0762878817",
+      "city": "Taourirt",
+      "address": "1065 RUE SETTAT LOT EL QODS TAOURIRT"
     }
   ],
   "products": [
     {
-      "title": "Casque Gaming RGB Pro",
+      "id": 14,
+      "title": "Outdoor Cycling Arm Bag, Portable Fitness Storage Pouch, Sports Phone Pouch, Running Arm Bag, Suitable for Fitness, Jogging, and Hiking",
+      "description": "",
+      "category": "Sport",
+      "price": 45.6,
+      "oldPrice": 57,
+      "stock": 48,
+      "image": "/images/uploads/1780588969981-2b9aed-a015c2d434bd45eba013dae6b024e2ca-goods.avif",
+      "gallery": [
+        "/images/uploads/1780588969981-1afe3e-14a03b1ef9e94ec79684e9c183f039ac-goods.avif",
+        "/images/uploads/1780588969981-c8a55f-758fae9cb42643b98fcbdcb47089d284-goods.avif",
+        "/images/uploads/1780588969981-3824fe-a8c3d3b2c67c4bd0b79c8ded832ab91a-goods.avif",
+        "/images/uploads/1780588969982-421252-bbaee7b5540d4e28a1597aa03c83ee01-goods.avif",
+        "/images/uploads/1780588969982-fd822f-bf189059bdbb4c8b8de7fcb9a211fe11-goods.avif"
+      ],
+      "featured": true,
+      "deal": true,
+      "discountPercent": 20,
+      "rating": 4.2,
+      "reviewCount": 0,
+      "sold": 0,
+      "createdAt": "2026-06-04T16:02:49.988Z"
+    },
+    {
+      "id": 13,
+      "title": "Quick-Drying And Breathable Sports Shorts, Print Pattern, Double-Layer Elastic Fabric, Cool And Comfortable Sports Pants, Suitable for Daily Outdoor Travel",
+      "description": "",
+      "category": "Sport",
+      "price": 166.6,
+      "oldPrice": 238,
+      "stock": 50,
+      "image": "/images/uploads/1780588860518-7daf94-3c28ded0-9d07-409d-8bc4-e9479fd38758.avif",
+      "gallery": [
+        "/images/uploads/1780588860518-725603-6d97cddc-1067-426d-8672-fe3e0735e93a.avif",
+        "/images/uploads/1780588860519-393644-6563d69d-455d-4fd1-9743-82d57e56d22c.avif",
+        "/images/uploads/1780588860519-7c9cd5-201076c2-9345-41cc-9884-00258bc73a34.avif",
+        "/images/uploads/1780588860519-03cd31-cb8f45e4-be0a-4b31-b5c0-1d10ef2c437d.avif",
+        "/images/uploads/1780588860520-48dda1-d841c9b1-082e-4dec-81e4-f461fb1c938f.avif"
+      ],
+      "featured": true,
+      "deal": true,
+      "discountPercent": 30,
+      "rating": 4.2,
+      "reviewCount": 0,
+      "sold": 0,
+      "createdAt": "2026-06-04T16:01:00.525Z"
+    },
+    {
+      "title": "ONIKUMA X25 Gaming Headset New FULL RGB Light Design Earphone for PC Gamer Smart Phone",
       "emoji": "🎧",
       "category": "Gaming",
       "price": 239.4,
       "oldPrice": 399,
-      "stock": 24,
+      "stock": 23,
       "featured": true,
       "deal": true,
-      "rating": 4.8,
-      "sold": 126,
+      "rating": 5,
+      "sold": 127,
       "id": 1,
       "slug": "casque-gaming-rgb-pro",
-      "description": "Casque Gaming RGB Pro avec design moderne, prix réduit, idéal pour un site e-commerce de démonstration.",
-      "image": "/images/products/p1.svg",
+      "description": "",
+      "image": "/images/uploads/1780589061655-c1d59d-203c6df262edb4746db9ba72b98479e6.avif",
       "createdAt": "2026-05-16T00:00:00.000Z",
       "discountPercent": 40,
-      "reviewCount": 0
+      "reviewCount": 0,
+      "gallery": [
+        "/images/uploads/1780589061655-c95d81-38ce6db2dbabdae6049b521499fc4f8d.avif",
+        "/images/uploads/1780589061655-be10ac-64aec65d-99fb-4e07-88ad-8baa70464491.avif",
+        "/images/uploads/1780589061656-6d20ec-b1d637cf-037c-495a-9298-70884ac85646.avif",
+        "/images/uploads/1780589061656-647be1-c027a75b1297eaebf206a09b04b23501.avif",
+        "/images/uploads/1780589061656-0056bf-cac6315e7278c3b43af640281efafeae.avif"
+      ]
     },
     {
-      "title": "Clavier mécanique compact",
+      "title": "K68 60% Wireless Mechanical Keyboard, BT 5.0/2.4Ghz with Dual Mode 2-In-1 Receiver, Compact 68-Key Hot Swappable Gaming Keyboard for PC Mac Xbox Smartphone",
       "emoji": "⌨️",
       "category": "Gaming",
-      "price": 324.35,
-      "oldPrice": 499,
+      "price": 524.5,
+      "oldPrice": 1049,
       "stock": 18,
       "featured": true,
       "deal": true,
@@ -50,14 +111,21 @@
       "sold": 88,
       "id": 2,
       "slug": "clavier-m-canique-compact",
-      "description": "Clavier mécanique compact avec design moderne, prix réduit, idéal pour un site e-commerce de démonstration.",
-      "image": "/images/products/p2.svg",
+      "description": "",
+      "image": "/images/uploads/1780590827406-4c2673-f4f2f9d044deb34a6d37e6b27c7c2d07-iuuc7hg.avif",
       "createdAt": "2026-05-16T00:00:00.000Z",
-      "discountPercent": 35,
-      "reviewCount": 0
+      "discountPercent": 50,
+      "reviewCount": 0,
+      "gallery": [
+        "/images/uploads/1780590827406-e76b26-0c2381c6df88a84fb2a5d0a71070b70e.avif",
+        "/images/uploads/1780590827406-0abefc-97c1eb53851f2cb86ba0e724026a96fb.avif",
+        "/images/uploads/1780590827406-858437-537f6d03b758bb79b71b7ff32c35189c.avif",
+        "/images/uploads/1780590827406-245761-c85a18d284c8dcd89a2f889e9350a000.avif",
+        "/images/uploads/1780590827406-0afdf2-f59032899e737943d455d9babb300923.avif"
+      ]
     },
     {
-      "title": "Souris sans fil rapide",
+      "title": "AOC 1pc Wireless Gaming Mouse DPI 3-Level Adjustment Silent Buttons Comfortable Non-Slip Design Office, Gaming, Entertainment Multi-Scene Adaptability",
       "emoji": "🖱️",
       "category": "Gaming",
       "price": 129.35,
@@ -69,14 +137,21 @@
       "sold": 210,
       "id": 3,
       "slug": "souris-sans-fil-rapide",
-      "description": "Souris sans fil rapide avec design moderne, prix réduit, idéal pour un site e-commerce de démonstration.",
-      "image": "/images/products/p3.svg",
+      "description": "",
+      "image": "/images/uploads/1780590906261-6d6b9a-80a6e638fd6c47a296c8f35f3f1e3a76-goods.avif",
       "createdAt": "2026-05-16T00:00:00.000Z",
       "discountPercent": 35,
-      "reviewCount": 0
+      "reviewCount": 0,
+      "gallery": [
+        "/images/uploads/1780590906261-1757bd-9bc23ec2d4c443b49f0ab14e179d421e-goods.avif",
+        "/images/uploads/1780590906262-157429-86e9db94dbf640bea6a3515409bf0c80-goods.avif",
+        "/images/uploads/1780590906262-996255-14710e66981b409f8308a2b63ceb651f-goods.avif",
+        "/images/uploads/1780590906262-e16e23-cb4b4ed475ee40efbd400dd73aa2c384-goods.avif",
+        "/images/uploads/1780590906262-2acdc1-f3e7c1a2a3d34fe1a2da5283e8ecc6d4-goods.avif"
+      ]
     },
     {
-      "title": "Montre connectée sport",
+      "title": "New Micro Curved Men'S And Women'S Smart Watch 4.65 cm Full Touch Screen, Mobile Phone Information Synchronization, Wireless Call, a Variety of Sports Modes, Outdoor Sports Phone, Compatible with Iphone And Android Phones",
       "emoji": "⌚",
       "category": "Électronique",
       "price": 194.35,
@@ -88,14 +163,21 @@
       "sold": 142,
       "id": 4,
       "slug": "montre-connect-e-sport",
-      "description": "Montre connectée sport avec design moderne, prix réduit, idéal pour un site e-commerce de démonstration.",
-      "image": "/images/products/p4.svg",
+      "description": "",
+      "image": "/images/uploads/1780591014958-b718de-67c3535d-8a7a-4ab6-abc0-897097f1b4a0.avif",
       "createdAt": "2026-05-16T00:00:00.000Z",
       "discountPercent": 35,
-      "reviewCount": 0
+      "reviewCount": 0,
+      "gallery": [
+        "/images/uploads/1780591014958-3971bb-9ba034ae-13e4-4983-94cd-a62d60e1e65d.avif",
+        "/images/uploads/1780591014958-351f63-27b9a313-a421-488a-97b4-995c66833ab9.avif",
+        "/images/uploads/1780591014958-d10291-455b9123-3e60-4e0a-ad49-41ee74f80390.avif",
+        "/images/uploads/1780591014958-603547-977156d5-e246-45ad-9e08-ad00b53516b5.avif",
+        "/images/uploads/1780591014959-99fb62-c79280ce-b9eb-11f0-9a6f-0a580aaf4bfa.avif"
+      ]
     },
     {
-      "title": "Mini projecteur HD",
+      "title": "HANDSKIT Brand Upgraded Home Theater Projector: A Wired Smart Projector with USB Connectivity, Offering Convenience and Easy Installation. Comes with Exquisite Accessory Gifts. This Mini HD Projector Features an 80° Display, Includes a Remote",
       "emoji": "📽️",
       "category": "Électronique",
       "price": 699.3,
@@ -107,14 +189,21 @@
       "sold": 34,
       "id": 5,
       "slug": "mini-projecteur-hd",
-      "description": "Mini projecteur HD avec design moderne, prix réduit, idéal pour un site e-commerce de démonstration.",
-      "image": "/images/products/p5.svg",
+      "description": "",
+      "image": "/images/uploads/1780591087832-f0db0d-b74b6fcc498e4965865b770db5743643-goods.avif",
       "createdAt": "2026-05-16T00:00:00.000Z",
       "discountPercent": 30,
-      "reviewCount": 0
+      "reviewCount": 0,
+      "gallery": [
+        "/images/uploads/1780591087832-5693ba-4f15cd537800478598e1c18157187f7d-goods.avif",
+        "/images/uploads/1780591087832-0356aa-05f76d65d2df46b891eba6d2ab5b99fe-goods.avif",
+        "/images/uploads/1780591087832-cc7cf2-b97b341b18fb4aa8b0115191c7ac2a45-goods.avif",
+        "/images/uploads/1780591087833-b5ac07-d2d0e8a7349b4018ad92109dc9514e36-goods.avif",
+        "/images/uploads/1780591087833-e8841d-e502f5c88cff46849eb7dcb4b905532a-goods.avif"
+      ]
     },
     {
-      "title": "Sac à dos anti-vol",
+      "title": "Anti-Theft Motorcycle Backpack with Lock, Convertible Crossbody Bag, Zipper Closure & Anti-Theft Compartment, Adjustable Shoulder Strap - Suitable for Commuting, Travel, Motorcycling - Large/Small Size Options - Men's Secure Motorcycle Crossbody Bag",
       "emoji": "🎒",
       "category": "Mode",
       "price": 155.35,
@@ -126,14 +215,21 @@
       "sold": 176,
       "id": 6,
       "slug": "sac-dos-anti-vol",
-      "description": "Sac à dos anti-vol avec design moderne, prix réduit, idéal pour un site e-commerce de démonstration.",
-      "image": "/images/products/p6.svg",
+      "description": "",
+      "image": "/images/uploads/1780751661119-24a26d-82eac07a872d4948bedd70c6d15e9184-goods.avif",
       "createdAt": "2026-05-16T00:00:00.000Z",
       "discountPercent": 35,
-      "reviewCount": 0
+      "reviewCount": 0,
+      "gallery": [
+        "/images/uploads/1780751661119-504c8c-6ec8581f9c854456b68ac0c3e0db7db0-goods.avif",
+        "/images/uploads/1780751661120-8b8f00-9c73cf85-628b-41e9-8674-cfb3d2ddf49a.avif",
+        "/images/uploads/1780751661120-976beb-49b50deb572d4cc5b20075cab9d909cc-goods.avif",
+        "/images/uploads/1780751661121-5e56e5-76aada1c2fa049079b79adc7cdd72383-goods.avif",
+        "/images/uploads/1780751661121-3e98d1-6c29c3db0e6642b8aed03eb4a3eb82ef-goods.avif"
+      ]
     },
     {
-      "title": "Veste légère urbaine",
+      "title": "Unisex Lightweight Windbreaker | Stretchy And Breathable + Adjustable Drawstring | Solid Color Casual Summer Jacket in Various Colors",
       "emoji": "🧥",
       "category": "Mode",
       "price": 226.85,
@@ -145,14 +241,20 @@
       "sold": 66,
       "id": 7,
       "slug": "veste-l-g-re-urbaine",
-      "description": "Veste légère urbaine avec design moderne, prix réduit, idéal pour un site e-commerce de démonstration.",
-      "image": "/images/products/p7.svg",
+      "description": "",
+      "image": "/images/uploads/1780751718327-37efa0-ed4fa89b-d236-48bc-87bb-b213be531ae4.avif",
       "createdAt": "2026-05-16T00:00:00.000Z",
       "discountPercent": 35,
-      "reviewCount": 0
+      "reviewCount": 0,
+      "gallery": [
+        "/images/uploads/1780751718327-4dc453-316fa916-06be-4dd6-8f15-f24cd9b4fe16.avif",
+        "/images/uploads/1780751718327-61098d-270259b4-5b68-4c04-be6a-90515f157670.avif",
+        "/images/uploads/1780751718328-923759-bc69389b-71ba-4f61-b360-bb7b375f63b4.avif",
+        "/images/uploads/1780751718329-5a104e-caadf612-e94b-4e2d-a08a-ac9156577c66.avif"
+      ]
     },
     {
-      "title": "Lampe LED bureau",
+      "title": "Dimmable Desk Lamp 3-level Touch Dimmable Eye-care LED Desk Lamp Can Be Used as a Cell Phone Holder Night Light USB Plug-in Desk Lamp Study Room Light",
       "emoji": "💡",
       "category": "Maison",
       "price": 96.85,
@@ -164,14 +266,21 @@
       "sold": 331,
       "id": 8,
       "slug": "lampe-led-bureau",
-      "description": "Lampe LED bureau avec design moderne, prix réduit, idéal pour un site e-commerce de démonstration.",
-      "image": "/images/products/p8.svg",
+      "description": "",
+      "image": "/images/uploads/1780751779521-d42656-da337f79-f970-4225-9039-3ccf43941273.avif",
       "createdAt": "2026-05-16T00:00:00.000Z",
       "discountPercent": 35,
-      "reviewCount": 0
+      "reviewCount": 0,
+      "gallery": [
+        "/images/uploads/1780751779521-70affe-6dc068a0-e0bc-4cce-bf5c-20fff56fe934.avif",
+        "/images/uploads/1780751779521-faf4ad-7af34c4b-db58-4011-ad6f-d7f00c1eafd4.avif",
+        "/images/uploads/1780751779521-930404-38d6ec02-2dc2-471f-a34e-4a38fb30b533.avif",
+        "/images/uploads/1780751779521-c332fd-172e412a-c95f-4591-bb38-e7b6c9ab0fbe.avif",
+        "/images/uploads/1780751779521-4198b3-77600487-63a2-497e-a045-7e7d43b6ed82.avif"
+      ]
     },
     {
-      "title": "Organisateur cuisine",
+      "title": "Portable Fruit And Vegetable Hanging Bag, Multifunctional Kitchen Storage Net Bag - Portable Handheld Hollow Breathable Fruit, Vegetables, Ginger And Garlic Wall-Mounted Organizer | Home Essential Accessory, Usable for 12 Months, Shelf Baskets",
       "emoji": "🍽️",
       "category": "Maison",
       "price": 77.35,
@@ -183,14 +292,20 @@
       "sold": 95,
       "id": 9,
       "slug": "organisateur-cuisine",
-      "description": "Organisateur cuisine avec design moderne, prix réduit, idéal pour un site e-commerce de démonstration.",
-      "image": "/images/products/p9.svg",
+      "description": "",
+      "image": "/images/uploads/1780751857251-bf112f-5eab27eb-a7c9-4dbf-9f58-d198a9f90b0b.avif",
       "createdAt": "2026-05-16T00:00:00.000Z",
       "discountPercent": 35,
-      "reviewCount": 0
+      "reviewCount": 0,
+      "gallery": [
+        "/images/uploads/1780751857251-5d89e5-0dad5b4b-1782-483f-9fe9-3c2f32ad8524.avif",
+        "/images/uploads/1780751857251-df90e7-97d0e15e-2b35-4f7c-89a9-e11f8a6397ce.avif",
+        "/images/uploads/1780751857251-920dbe-c45524db-b905-422d-9050-e843c4f1690f.avif",
+        "/images/uploads/1780751857252-0718e2-e3baf202-e295-4962-b182-18f249e19775.avif"
+      ]
     },
     {
-      "title": "Kit soin visage",
+      "title": "Men'S Lakerain Skin Care Package, Including Face Cleanser, Exfoliator, Serum, Eye Cream, And Moisturizers for Morning And Evening, Perfect for Hydrated Skin And Holiday Gifting",
       "emoji": "🧴",
       "category": "Beauté",
       "price": 142.35,
@@ -202,14 +317,21 @@
       "sold": 119,
       "id": 10,
       "slug": "kit-soin-visage",
-      "description": "Kit soin visage avec design moderne, prix réduit, idéal pour un site e-commerce de démonstration.",
-      "image": "/images/products/p10.svg",
+      "description": "",
+      "image": "/images/uploads/1780752079763-cf3200-f7d6af63-f68d-402e-b43d-cf72e2928d89.avif",
       "createdAt": "2026-05-16T00:00:00.000Z",
       "discountPercent": 35,
-      "reviewCount": 0
+      "reviewCount": 0,
+      "gallery": [
+        "/images/uploads/1780752079763-45abe6-6c5a73ff-935f-4070-94be-f35e595e3ad0.avif",
+        "/images/uploads/1780752079763-8f9feb-663be0f1-887f-443f-a7db-07be95d17d79.avif",
+        "/images/uploads/1780752079763-2723c1-12779ab6-663a-4767-9bbb-f988534be518.avif",
+        "/images/uploads/1780752079763-1a4714-b323ef5a-b358-461a-824c-4fba46f03a5e.avif",
+        "/images/uploads/1780752079763-059248-c995d92a-91b7-4335-b836-e317a2d7c13c.avif"
+      ]
     },
     {
-      "title": "Ballon fitness + pompe",
+      "title": "1pc Thickened Heavy-Duty Inflatable Fitness Ball with Pump, for Yoga Balance-Core Strength Training, Gymnastics, Dance Massage Ball",
       "emoji": "🏀",
       "category": "Sport",
       "price": 90.3,
@@ -221,14 +343,17 @@
       "sold": 73,
       "id": 11,
       "slug": "ballon-fitness-pompe",
-      "description": "Ballon fitness + pompe avec design moderne, prix réduit, idéal pour un site e-commerce de démonstration.",
-      "image": "/images/products/p11.svg",
+      "description": "",
+      "image": "/images/uploads/1780752136089-5254f8-2e7cee99bb6b48528a812b693cd0f6fd-goods.avif",
       "createdAt": "2026-05-16T00:00:00.000Z",
       "discountPercent": 30,
-      "reviewCount": 0
+      "reviewCount": 0,
+      "gallery": [
+        "/images/uploads/1780752136089-b735f3-2e7cee99bb6b48528a812b693cd0f6fd-goods-1.avif"
+      ]
     },
     {
-      "title": "Drone mini caméra",
+      "title": "3pcs Screen Protector for DJI Mini 3 Pro / RC / DJI Air / RC2 / Mini 4 Pro / Mini 3 / MAVIC Pro Remote Controller - [5H Hardness], Anti-Glare, Scratch-Resistant, Impact-Resistant, Full Coverage with Camera Cutout, Compatible with DJI Mini",
       "emoji": "🚁",
       "category": "Jouets",
       "price": 421.85,
@@ -240,13 +365,158 @@
       "sold": 52,
       "id": 12,
       "slug": "drone-mini-cam-ra",
-      "description": "Drone mini caméra avec design moderne, prix réduit, idéal pour un site e-commerce de démonstration.",
-      "image": "/images/products/p12.svg",
+      "description": "",
+      "image": "/images/uploads/1780752213446-367e2d-1b0b5d0d998248a9b856a9313c7a3e61-goods.avif",
       "createdAt": "2026-05-16T00:00:00.000Z",
       "discountPercent": 35,
-      "reviewCount": 0
+      "reviewCount": 0,
+      "gallery": [
+        "/images/uploads/1780752213446-20dd29-0cb1ff19-99ed-474d-b21d-ce8eb8aa4868.avif",
+        "/images/uploads/1780752213446-2804db-416a80ebca3540f5b668e688362dccc6-goods.avif",
+        "/images/uploads/1780752213446-dc5047-3211fc3f8d704c0793a1364bc04c6ddc-goods.avif",
+        "/images/uploads/1780752213446-ecd7e0-b939a5db2093401ea9bea33f7c35eb92-goods.avif"
+      ]
     }
   ],
-  "orders": [],
-  "reviews": []
+  "orders": [
+    {
+      "id": 1,
+      "reference": "CMD-1779533302237",
+      "userId": 2,
+      "customer": {
+        "fullName": "Client Démo",
+        "phone": "0762878817",
+        "city": "Taourirt",
+        "address": "1065 RUE SETTAT LOT EL QODS TAOURIRT",
+        "email": "client@market.ma"
+      },
+      "items": [
+        {
+          "productId": 1,
+          "title": "Casque Gaming RGB Pro",
+          "image": "/images/products/p1.svg",
+          "price": 239.4,
+          "qty": 1,
+          "subtotal": 239.4
+        }
+      ],
+      "subtotal": 239.4,
+      "shipping": 20,
+      "discount": 0,
+      "total": 259.4,
+      "paymentMethod": "cash",
+      "paymentStatus": "paid",
+      "paymentReference": "",
+      "paymentDetails": null,
+      "status": "delivered",
+      "statusHistory": [
+        {
+          "status": "new",
+          "at": "2026-05-23T10:48:22.237Z",
+          "by": "Client"
+        },
+        {
+          "status": "delivered",
+          "at": "2026-05-24T11:59:01.210Z",
+          "by": "Admin"
+        }
+      ],
+      "createdAt": "2026-05-23T10:48:22.237Z"
+    }
+  ],
+  "reviews": [
+    {
+      "id": 1,
+      "productId": 14,
+      "userId": 2,
+      "userName": "Client Démo",
+      "rating": 4,
+      "comment": "good",
+      "status": "pending",
+      "verifiedPurchase": false,
+      "createdAt": "2026-06-06T15:04:54.032Z",
+      "updatedAt": "2026-06-06T15:04:54.032Z"
+    }
+  ],
+  "wishlist": [],
+  "categories": [
+    {
+      "id": 1,
+      "name": "Électronique",
+      "slug": "electronique",
+      "icon": "💻",
+      "createdAt": "2026-05-19T19:54:20.261Z"
+    },
+    {
+      "id": 2,
+      "name": "Gaming",
+      "slug": "gaming",
+      "icon": "🎮",
+      "createdAt": "2026-05-19T19:54:20.262Z"
+    },
+    {
+      "id": 3,
+      "name": "Mode",
+      "slug": "mode",
+      "icon": "👕",
+      "createdAt": "2026-05-19T19:54:20.262Z"
+    },
+    {
+      "id": 4,
+      "name": "Maison",
+      "slug": "maison",
+      "icon": "🏠",
+      "createdAt": "2026-05-19T19:54:20.262Z"
+    },
+    {
+      "id": 5,
+      "name": "Beauté",
+      "slug": "beaute",
+      "icon": "💄",
+      "createdAt": "2026-05-19T19:54:20.262Z"
+    },
+    {
+      "id": 6,
+      "name": "Sport",
+      "slug": "sport",
+      "icon": "🏋️",
+      "createdAt": "2026-05-19T19:54:20.262Z"
+    },
+    {
+      "id": 7,
+      "name": "Accessoires",
+      "slug": "accessoires",
+      "icon": "🎧",
+      "createdAt": "2026-05-19T19:54:20.262Z"
+    },
+    {
+      "id": 8,
+      "name": "Enfants",
+      "slug": "enfants",
+      "icon": "🧸",
+      "createdAt": "2026-05-19T19:54:20.262Z"
+    },
+    {
+      "id": 9,
+      "name": "Auto",
+      "slug": "auto",
+      "icon": "🚗",
+      "createdAt": "2026-05-19T19:54:20.262Z"
+    },
+    {
+      "id": 10,
+      "name": "Bureau",
+      "slug": "bureau",
+      "icon": "🖥️",
+      "createdAt": "2026-05-19T19:54:20.262Z"
+    },
+    {
+      "id": 11,
+      "name": "Jouets",
+      "slug": "jouets",
+      "icon": "🛒",
+      "createdAt": "2026-05-19T19:54:20.262Z"
+    }
+  ],
+  "contactMessages": []
 }

@@ -13,7 +13,7 @@
         <% } %>
       </div>
       <div class="trust-row">
-        <span>🚚 Livraison dès 25 DH</span>
+        <span>🚚 Livraison par ville</span>
         <span>💳 Paiement en ligne au checkout</span>
         <span>↩️ Retours faciles</span>
       </div>
@@ -22,29 +22,75 @@
     <div class="coupon-card coupon-modern">
       <span class="badge">🎁 Avantage panier</span>
       <div class="big">-50 DH</div>
-      <p>Plus vous ajoutez, plus vous économisez : réduction dès 700 DH et livraison gratuite dès 300 DH.</p>
+      <p>Plus vous ajoutez, plus vous économisez : réduction dès 700 DH et livraison gratuite dès 1000 DH.</p>
       <a class="btn light" href="/products?sort=sold">Voir top ventes</a>
     </div>
   </div>
 </section>
 
-<section class="categories">
-  <div class="container">
-    <div class="category-row category-icons">
-      <a class="category-pill" href="/products">✨ Toutes</a>
-      <% categories.forEach(function(cat){ %>
-        <a class="category-pill" href="/products?category=<%= encodeURIComponent(cat) %>">🛒 <%= cat %></a>
-      <% }) %>
-    </div>
-  </div>
-</section>
-
 <main class="container">
-  <div class="promo-strip">
-    <div><strong>Offres exclusives</strong><span>Des promotions sélectionnées chaque jour</span></div>
-    <div><strong>Produits populaires</strong><span>Les articles les plus demandés</span></div>
-    <div><strong>Service rapide</strong><span>Commande simple et suivi clair</span></div>
-  </div>
+  <section class="quick-value-strip" aria-label="Avantages SupMtiShop">
+    <article>
+      <span class="quick-value-icon">🏷️</span>
+      <div>
+        <strong>Offres sélectionnées</strong>
+        <p>Des promotions utiles et clairement présentées pour acheter au meilleur prix.</p>
+      </div>
+    </article>
+    <article>
+      <span class="quick-value-icon">⭐</span>
+      <div>
+        <strong>Produits recommandés</strong>
+        <p>Un catalogue organisé pour retrouver rapidement les articles les plus demandés.</p>
+      </div>
+    </article>
+    <article>
+      <span class="quick-value-icon">📦</span>
+      <div>
+        <strong>Commande maîtrisée</strong>
+        <p>Un panier simple, un suivi clair et une facture disponible après validation.</p>
+      </div>
+    </article>
+  </section>
+
+  <section class="trust-section final-trust-section">
+    <div class="trust-section-head">
+      <span class="badge soft">Confiance client</span>
+      <h2>Achetez en toute confiance</h2>
+      <p>Nous simplifions votre expérience d’achat avec un catalogue organisé, un suivi clair des commandes et un support client disponible pour vous accompagner.</p>
+    </div>
+    <div class="trust-feature-grid">
+      <article class="trust-feature-card">
+        <span class="trust-icon">🚚</span>
+        <div>
+          <h3>Livraison nationale</h3>
+          <p>Recevez vos commandes partout au Maroc avec des frais calculés selon votre ville.</p>
+        </div>
+      </article>
+      <article class="trust-feature-card">
+        <span class="trust-icon">💳</span>
+        <div>
+          <h3>Paiement flexible</h3>
+          <p>Choisissez le paiement à la livraison ou le paiement en ligne simulé pour finaliser votre commande.</p>
+        </div>
+      </article>
+      <article class="trust-feature-card">
+        <span class="trust-icon">🛡️</span>
+        <div>
+          <h3>Commande sécurisée</h3>
+          <p>Chaque commande est enregistrée avec un récapitulatif clair et une facture téléchargeable.</p>
+        </div>
+      </article>
+      <article class="trust-feature-card">
+        <span class="trust-icon">💬</span>
+        <div>
+          <h3>Support client</h3>
+          <p>Contactez facilement notre équipe via WhatsApp pour toute question avant ou après l’achat.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
 
   <div class="section-head">
     <div>
@@ -59,6 +105,26 @@
       <%- include('partials/product-card', { product }) %>
     <% }) %>
   </div>
+
+  <div class="section-head">
+    <div>
+      <h2>Meilleures ventes</h2>
+      <p>Les produits les plus commandés par les clients.</p>
+    </div>
+    <a class="btn ghost small" href="/products?sort=sold">Voir top ventes</a>
+  </div>
+
+  <div class="product-grid">
+    <% bestSellers.forEach(function(product){ %>
+      <%- include('partials/product-card', { product }) %>
+    <% }) %>
+  </div>
+
+  <section class="why-grid">
+    <div class="card why-card"><strong>Livraison organisée</strong><span>Les frais de livraison sont calculés selon la ville afin d’offrir au client une commande claire dès la validation du panier.</span></div>
+    <div class="card why-card"><strong>Offres promotionnelles</strong><span>Les codes de réduction permettent d’appliquer des avantages commerciaux et d’améliorer l’expérience d’achat.</span></div>
+    <div class="card why-card"><strong>Assistance d’achat</strong><span>L’assistant produit guide le client dans sa recherche et propose rapidement des articles adaptés à son besoin.</span></div>
+  </section>
 
   <div class="section-head">
     <div>
